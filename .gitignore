@@ -1,0 +1,10 @@
+# VS Files
+.vscode
+
+# C Files
+*.a
+*.o
+*.exe
+
+# Mac Files
+.DS_Store
