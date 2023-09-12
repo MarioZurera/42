@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 04:31:56 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/08/04 21:27:38 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/12 19:25:35 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/12 19:54:11 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 char	*ft_strnstr(const char *str, const char *substr, size_t n)
 {
-	char	*pos;
+	size_t	i;
+	size_t	substr_len;
 
+	substr_len = ft_strlen(substr);
 	if (!*substr)
 		return ((char *) str);
-	pos = ft_strstr(str, substr);
-	if (pos == NULL)
+	if (ft_strlen(str) < substr_len)
 		return (NULL);
-	if (pos - str + ft_strlen(substr) <= n)
-		return (pos);
+	i = 0;
+	while (str[i] && i + substr_len <= n)
+	{
+		if (ft_strncmp(&str[i], substr, substr_len) == 0)
+			return ((char *)(str + i));
+		i++;
+	}
 	return (NULL);
 }

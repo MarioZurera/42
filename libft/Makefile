@@ -1,13 +1,13 @@
-CC	= gcc
-SRCS	= $(filter-out %_bonus.c, $(wildcard *.c))
+CC		= gcc
+SRCS	= $(filter-out %_bonus.c, $(wildcard ft_*.c))
 OBJS	= $(SRCS:.c=.o)
-BONUS	= $(wildcard *_bonus.c)
+BONUS	= $(wildcard ft_*_bonus.c)
 BONOBJS	= $(BONUS:.c=.o)
 NAME	= libft.a
 CFLAGS	= -Wall -Wextra -Werror
 LIBC	= ar rc
 LIBR	= ranlib
-RM	= rm -f
+RM		= rm -f
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -I ./ -o $@

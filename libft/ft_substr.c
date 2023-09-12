@@ -5,12 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 15:04:55 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/08/04 21:27:38 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/12 19:26:13 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/12 19:26:18 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	ft_min_size(size_t a, size_t b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
