@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/13 13:43:02 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/13 13:43:23 by mzurera-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
 
 char	eval_flag(const char *format, int *pos)
 {
-	char flag;
-	
+	char	flag;
+
 	flag = '\0';
 	while (format[*pos] == '#' || format[*pos] == ' ' || format[*pos] == '+')
 	{
@@ -42,7 +54,7 @@ int	eval_conversion(const char *format, int pos, va_list arg)
 
 int	ft_printf(const char *format, ...)
 {
-	va_list arg;
+	va_list	arg;
 	int		printed_chars;
 	int		pos;
 

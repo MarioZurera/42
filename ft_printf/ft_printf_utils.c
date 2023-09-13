@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/13 13:43:36 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/13 13:44:03 by mzurera-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
 
 void	eval_char(const char *format, int pos, va_list arg, char flag)
@@ -13,7 +25,7 @@ void	eval_string(const char *format, int pos, va_list arg, char flag)
 {
 	char	*s;
 
-	s = va_arg(arg, char*);
+	s = va_arg(arg, char *);
 	if (flag == ' ' && !*s)
 		ft_putchar_fd(' ', 1);
 	else
@@ -27,7 +39,7 @@ void	eval_pointer(const char *format, int pos, va_list arg, char flag)
 	unsigned long	addr;
 	char			hex;
 
-	ptr = va_arg(arg, void*);
+	ptr = va_arg(arg, void *);
 	addr = (unsigned long) ptr;
 	if (flag == '+' && addr > 0)
 		ft_putchar_fd('+', 1);
