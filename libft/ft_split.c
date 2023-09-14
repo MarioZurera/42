@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:23:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/13 13:35:53 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/14 09:38:30 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ static void	ft_strclear(char **strs)
 	i = 0;
 	while (strs[i])
 		free(strs[i++]);
+	free(strs);
+}
+
+static void	ft_find_word(const char *s, char c, int *begin, int *end)
+{
+	while (s[*begin] && s[*begin] == c)
+		++(*begin);
+	*end = *begin;
+	while (s[*end] && s[*end] != c)
+		++(*end);
 }
 
 char	**ft_split(const char *s, char c)
@@ -53,16 +63,14 @@ char	**ft_split(const char *s, char c)
 	index = 0;
 	begin = 0;
 	end = 0;
-	while (s[end] && (begin = end))
+	while (s[end])
 	{
-		while ((s[begin] && s[begin] == c) || ((end = begin) && 0))
-			++begin;
-		while (s[end] && s[end] != c)
-			++end;
+		ft_find_word(s, c, &begin, &end);
 		if (begin != end)
 			strs[index++] = ft_substr(s, begin, end - begin);
 		if (strs[index - 1] == NULL)
-			return (ft_strclear(strs), NULL);Î
+			return (ft_strclear(strs), NULL);
+		begin = end;
 	}
 	strs[index] = NULL;
 	return (strs);
