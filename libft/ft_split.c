@@ -31,6 +31,15 @@ static int	ft_strs_len(const char *s, char c)
 	return (length);
 }
 
+static void	ft_strclear(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+		free(strs[i++]);
+}
+
 char	**ft_split(const char *s, char c)
 {
 	char	**strs;
@@ -44,16 +53,16 @@ char	**ft_split(const char *s, char c)
 	index = 0;
 	begin = 0;
 	end = 0;
-	while (s[begin])
+	while (s[end] && (begin = end))
 	{
-		while (s[begin] && s[begin] == c)
+		while ((s[begin] && s[begin] == c) || ((end = begin) && 0))
 			++begin;
-		end = begin;
 		while (s[end] && s[end] != c)
 			++end;
 		if (begin != end)
 			strs[index++] = ft_substr(s, begin, end - begin);
-		begin = end;
+		if (strs[index - 1] == NULL)
+			return (ft_strclear(strs), NULL);Î
 	}
 	strs[index] = NULL;
 	return (strs);
