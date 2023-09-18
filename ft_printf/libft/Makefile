@@ -16,8 +16,7 @@ BONUS	= ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c \
 BONOBJS	= $(BONUS:.c=.o)
 NAME	= libft.a
 CFLAGS	= -Wall -Wextra -Werror
-LIBC	= ar rc
-LIBR	= ranlib
+LIBC	= ar rcs
 RM		= rm -f
 
 .c.o:
@@ -25,7 +24,6 @@ RM		= rm -f
 
 $(NAME): $(OBJS)
 	$(LIBC) $(NAME) $(OBJS)
-	$(LIBR) $(NAME)
 
 all: $(NAME)
 
@@ -40,4 +38,5 @@ re: fclean all
 bonus: $(OBJS) $(BONOBJS)
 	$(RM) $(NAME)
 	$(LIBC) $(NAME) $(OBJS) $(BONOBJS)
-	$(LIBR) $(NAME)
+
+.PHONY: all .c.o clean fclean bonus re

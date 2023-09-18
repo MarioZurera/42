@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:23:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/14 19:12:38 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/14 09:38:30 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**ft_split(const char *s, char c)
 		ft_find_word(s, c, &begin, &end);
 		if (begin != end)
 			strs[index++] = ft_substr(s, begin, end - begin);
-		if (begin != end && strs[index - 1] == NULL)
+		if (strs[index - 1] == NULL)
 			return (ft_strclear(strs), NULL);
 		begin = end;
 	}
