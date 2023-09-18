@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/13 18:42:13 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:29:58 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,6 +430,9 @@ int		ft_max(int a, int b);
  * @note If the integers a and b are equal, the integer a is returned.
 */
 int		ft_min(int a, int b);
+
+int		ft_nbrlen(int n);
+int 	ft_unbrlen(unsigned int n);
 
 /**
  * @brief Create a new node of a linked list.

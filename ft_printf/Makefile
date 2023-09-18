@@ -19,8 +19,8 @@ LIBFT	= libft.a
 
 $(NAME): $(OBJS)
 	make bonus -C $(LIB_DIR)/
-	mv $(LIB_DIR)/$(LIBFT) $(LIBFT)
-	$(LIBC) $(NAME) $(OBJS) $(LIBFT)
+	mv $(LIB_DIR)/$(LIBFT) $(NAME)
+	$(LIBC) $(NAME) $(OBJS)
 
 all: $(NAME)
 
@@ -35,8 +35,7 @@ re: fclean all
 
 bonus: $(BONOBJS)
 	make bonus -C $(LIB_DIR)/
-	mv $(LIB_DIR)/$(LIBFT) $(LIBFT)
-	$(RM) $(NAME)
+	mv $(LIB_DIR)/$(LIBFT) $(NAME) 
 	$(LIBC) $(NAME) $(BONOBJS)
 
 .PHONY: all bonus clean fclean re .c.o
