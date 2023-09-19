@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:26:04 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/19 17:52:11 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:25:01 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,22 @@ static void	print_hexint(unsigned int addr, char letter, int *printed_chars)
 
 int	eval_hexlow(va_list arg)
 {
-	unsigned long	addr;
+	unsigned int	hex;
 	int				printed_chars;
 
-	addr = va_arg(arg, unsigned int);
-	print_hexint(addr, 'a', &printed_chars);
+	printed_chars = 0;
+	hex = va_arg(arg, unsigned int);
+	print_hexint(hex, 'a', &printed_chars);
 	return (printed_chars);
 }
 
 int	eval_hexup(va_list arg)
 {
-	unsigned long	addr;
+	unsigned int	hex;
 	int				printed_chars;
 
-	addr = va_arg(arg, unsigned int);
-	print_hexint(addr, 'A', &printed_chars);
+	printed_chars = 0;
+	hex = va_arg(arg, unsigned int);
+	print_hexint(hex, 'A', &printed_chars);
 	return (printed_chars);
 }

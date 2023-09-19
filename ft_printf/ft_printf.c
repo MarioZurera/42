@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:25:40 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/19 16:46:59 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:04:13 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[pos] == '%')
 		{
-			pos++;
+			++pos;
 			printed_chars += eval_conversion(format, pos, arg);
 		}
 		else
