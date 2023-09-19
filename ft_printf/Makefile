@@ -33,9 +33,15 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(BONOBJS)
+bonus: $(OBJS)
 	make bonus -C $(LIB_DIR)/
 	mv $(LIB_DIR)/$(LIBFT) $(NAME) 
-	$(LIBC) $(NAME) $(BONOBJS)
+	$(LIBC) $(NAME) $(OBJS)
+
+test: $(NAME)
+	$(CC) $(CFLAGS) -o main.o -I $(INCS) -c main.c
+	$(CC) $(CFLAGS) -o test main.o -L. -lftprintf
+	./test
+	$(RM) test main.o
 
 .PHONY: all bonus clean fclean re .c.o

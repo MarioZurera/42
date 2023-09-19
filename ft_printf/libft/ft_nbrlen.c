@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:21:09 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/18 19:23:38 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:58:52 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_nbrlen(int n)
 	int	length;
 
 	length = 0;
-	if (n == 0)
+	if (n <= 0)
 		++length;
 	while (n > 0 || n < 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 13:43:02 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/18 19:25:12 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/19 16:25:40 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/19 16:46:59 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	eval_conversion(const char *format, int pos, va_list arg)
 	else if (format[pos] == 'X')
 		printed_chars = eval_hexup(arg);
 	else if (format[pos] == '%')
-		(++printed_chars, ft_putchar_fd('%', 1));
+	{
+		++printed_chars;
+		ft_putchar_fd('%', 1);
+	}
 	return (printed_chars);
 }
 
@@ -47,17 +50,17 @@ int	ft_printf(const char *format, ...)
 	pos = 0;
 	while (format[pos])
 	{
-		if (format[pos++] == '%')
+		if (format[pos] == '%')
 		{
+			pos++;
 			printed_chars += eval_conversion(format, pos, arg);
-			++pos;
 		}
 		else
 		{
 			ft_putchar_fd(format[pos], 1);
-			++pos;
 			++printed_chars;
 		}
+		++pos;
 	}
 	va_end(arg);
 	return (printed_chars);

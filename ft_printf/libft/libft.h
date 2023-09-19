@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/18 19:29:58 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:28:19 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -395,6 +395,7 @@ void	ft_putstr_fd(const char *s, int fd);
  * @note The number n is printed as if it were a string.
 */
 void	ft_putnbr_fd(int n, int fd);
+void	ft_putunbr_fd(unsigned int n, int fd);
 
 /**
  * @brief Print the string s to the specified file descriptor
@@ -430,9 +431,8 @@ int		ft_max(int a, int b);
  * @note If the integers a and b are equal, the integer a is returned.
 */
 int		ft_min(int a, int b);
-
 int		ft_nbrlen(int n);
-int 	ft_unbrlen(unsigned int n);
+int		ft_unbrlen(unsigned int n);
 
 /**
  * @brief Create a new node of a linked list.

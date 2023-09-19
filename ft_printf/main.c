@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:24:35 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/19 16:31:21 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/19 16:33:20 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/19 17:49:21 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include "ft_printf.h"
+#include <limits.h>
 
-size_t	ft_strlen(const char *s)
+int	main(void)
 {
-	int	length;
-
-	if (s == NULL)
-		return (0);
-	length = 0;
-	while (s[length])
-		++length;
-	return (length);
+	ft_printf(" %x %x %x %x %x %x %x \n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, (unsigned int) ULONG_MAX, 0, -42);
+	printf(" %x %x %x %x %x %x %x", INT_MAX, INT_MIN, (unsigned int) LONG_MAX, (unsigned int) LONG_MIN, (unsigned int) ULONG_MAX, 0, -42);
+	return (0);
 }
