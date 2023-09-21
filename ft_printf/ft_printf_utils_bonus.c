@@ -12,17 +12,16 @@
 
 #include "ft_printf_bonus.h"
 
-int	eval_char(va_list arg, char *flags)
+int	eval_char(va_list arg, char *flg)
 {
 	unsigned char	c;
 	int				i;
 	int				n;
 
 	i = 0;
-	while (flags[i] && !ft_strchr(".#0+ ", flags[i]) &&
-		   	(!ft_isdigit(flags[i]) || flags[i] == '0'))
+	while (flg[i] && !ft_strchr(".#0+ ", flg[i]) && !ft_isdigit(flg[i])
 		i++;
-	if (!ft_isdigit(flags[i]) || flags != '0')
+	if (ft_strchr(".#0+ ", flg[i])
 		return (-1);
 
 	c = (unsigned char) va_arg(arg, int);
