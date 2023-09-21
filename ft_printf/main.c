@@ -6,19 +6,16 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:33:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/19 21:29:25 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:56:03 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "ft_printf.h"
-#include <limits.h>
 
 int	main(void)
 {
-	printf("^.^/%26c^.^/", 'a');
-	printf("\n");
-	ft_printf("^.^/%26c^.^/", 'a');
+	printf("%.9d.9d", 123456);
 	printf("\n");
 	return (0);
 }

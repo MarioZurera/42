@@ -18,7 +18,7 @@ LIBFT	= libft.a
 	$(CC) $(CFLAGS) -c $< -I $(INCS) -o $@
 
 $(NAME): $(OBJS)
-	make bonus -C $(LIB_DIR)/
+	make all -C $(LIB_DIR)/
 	mv $(LIB_DIR)/$(LIBFT) $(NAME)
 	$(LIBC) $(NAME) $(OBJS)
 
@@ -34,7 +34,7 @@ fclean: clean
 re: fclean all
 
 bonus: $(OBJS)
-	make bonus -C $(LIB_DIR)/
+	make all -C $(LIB_DIR)/
 	mv $(LIB_DIR)/$(LIBFT) $(NAME) 
 	$(LIBC) $(NAME) $(OBJS)
 
