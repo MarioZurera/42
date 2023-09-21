@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:14:52 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:15:42 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/12 19:24:44 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/12 19:24:45 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_abs(int n)
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	char			*str;
+	unsigned int	i;
+
+	str = (char *) malloc(ft_strlen(s) + 1);
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = (*f)(i, s[i]);
+		++i;
+	}
+	str[i] = 0;
+	return (str);
 }

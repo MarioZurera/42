@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:14:52 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:15:42 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/18 19:21:09 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/19 16:58:52 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_abs(int n)
+int	ft_nbrlen(int n)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	int	length;
+
+	length = 0;
+	if (n <= 0)
+		++length;
+	while (n > 0 || n < 0)
+	{
+		n /= 10;
+		++length;
+	}
+	return (length);
 }

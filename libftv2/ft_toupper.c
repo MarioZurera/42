@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:14:52 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:15:42 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/12 19:26:38 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/12 19:26:39 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_abs(int n)
+int	ft_toupper(int c)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	if (ft_islower(c))
+		return (c - ('a' - 'A'));
+	return (c);
 }

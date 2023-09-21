@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:14:52 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:15:42 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/12 19:23:50 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/12 19:23:51 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_abs(int n)
+char	*ft_strdup(const char *s)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	size_t	size;
+	char	*str;
+
+	size = ft_strlen(s) + 1;
+	str = (char *) malloc(size);
+	if (str == NULL)
+		return (NULL);
+	ft_strlcpy(str, s, size);
+	return (str);
 }

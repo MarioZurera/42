@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:14:52 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:15:42 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/12 19:21:16 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/12 19:21:18 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_abs(int n)
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	char	*c_dest;
+	char	*c_src;
+	size_t	i;
+
+	c_dest = (char *) dest;
+	c_src = (char *) src;
+	i = 0;
+	while (i < n && c_src[i] != c)
+	{
+		c_dest[i] = c_src[i];
+		++i;
+	}
+	if (c_src[i] == c)
+	{
+		c_dest[i] = c;
+		return (&c_src[i + 1]);
+	}
+	return (NULL);
 }

@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:14:52 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:15:42 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/12 19:26:00 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/12 19:26:00 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_abs(int n)
+char	*ft_strtrim(const char *s1, const char *set)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = ft_strlen(s1) - 1;
+	while (s1[i] && ft_strchr(set, s1[i]))
+		++i;
+	while (j > i && ft_strchr(set, s1[j]))
+		--j;
+	str = ft_substr(s1, i, j - i + 1);
+	if (str == NULL)
+		return (NULL);
+	return (str);
 }

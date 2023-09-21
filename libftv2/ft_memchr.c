@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:14:52 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:15:42 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/12 19:21:34 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/12 19:21:35 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_abs(int n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	char	*memory;
+	size_t	i;
+
+	memory = (char *) s;
+	i = 0;
+	while (i < n && memory[i] != (char) c)
+		++i;
+	if (i == n)
+		return (NULL);
+	return (memory + i);
 }

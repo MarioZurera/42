@@ -9,7 +9,10 @@ SRCS	= ft_abs.c ft_alnum.c ft_atoi.c ft_bzero.c ft_calloc.c \
 		  ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
 		  ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_nbrlen.c ft_unbrlen.c \
 		  ft_putunbr_fd.c ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-		  ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
+		  ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_smax.c ft_smin.c \
+		  ft_dlstadd_front.c ft_dlstadd_back.c ft_realloc.c \
+		  ft_setnew.c
+
 OBJS	= $(SRCS:.c=.o)
 NAME	= libft.a
 CFLAGS	= -Wall -Wextra -Werror

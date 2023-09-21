@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
 /*   Updated: 2023/09/13 18:42:13 by mzurera-         ###   ########.fr       */

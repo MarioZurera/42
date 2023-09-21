@@ -21,7 +21,22 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
+	struct s_list	*prev;
 }	t_list;
+
+typedef struct s_map_content
+{
+	int		key;
+	void	*value;
+} t_map_content;
+
+typedef struct s_map
+{
+	size_t		size;
+	size_t		memory:
+	t_list	**elements;
+} t_map;
+
 
 /**
  * @brief Allocate memories and initialize to 0 the memory area.
@@ -438,6 +453,9 @@ int		ft_max(int a, int b);
 */
 int		ft_min(int a, int b);
 
+size_t	ft_smax(size_t a, size_t b);
+size_t	ft_smin(size_t a, size_t b);
+
 /**
  * @brief Get the number of digits of the integer n.
  * @param n The integer.
@@ -463,15 +481,15 @@ t_list	*ft_lstnew(void *content);
 
 /**
  * @brief Add a new node at the beginning of a linked list.
- * @param lst The pointer to the first node of the linked list.
+ * @param lst The pointer to the head of the linked list.
  * @param new The pointer to the new node to be added.
- * @note The pointer to the first node of the linked list is updated.
+ * @note The pointer to the head of the linked list is updated.
 */
 void	ft_lstadd_front(t_list **lst, t_list *new);
 
 /**
  * @brief Get the number of nodes in a linked list.
- * @param lst The pointer to the first node of the linked list.
+ * @param lst The pointer to the head of the linked list.
  * @return The number of nodes in the linked list.
  * @note If the linked list is empty, 0 is returned.
 */
@@ -479,7 +497,7 @@ int		ft_lstsize(t_list *lst);
 
 /**
  * @brief Get the last node of a linked list.
- * @param lst The pointer to the first node of the linked list.
+ * @param lst The pointer to the head of the linked list.
  * @return The pointer to the last node of the linked list.
  * @note If the linked list is empty, NULL is returned.
 */
@@ -487,9 +505,9 @@ t_list	*ft_lstlast(t_list *lst);
 
 /**
  * @brief Add a new node at the end of a linked list.
- * @param lst The pointer to the first node of the linked list.
+ * @param lst The pointer to the head of the linked list.
  * @param new The pointer to the new node to be added.
- * @note If the list is empty, the pointer to the first node of the
+ * @note If the list is empty, the pointer to the head of the
  * linked list is updated.
 */
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -503,16 +521,16 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 
 /**
  * @brief Delete all the nodes of a linked list.
- * @param lst The pointer to the first node of the linked list.
+ * @param lst The pointer to the head of the linked list.
  * @param del The function to be applied to the content of the nodes.
- * @note The pointer to the first node of the linked list is updated.
+ * @note The pointer to the head of the linked list is updated.
  * @note The function del is applied to the content of each node.
 */
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 
 /**
  * @brief Apply the function f to the content of each node of a linked list.
- * @param lst The pointer to the first node of the linked list.
+ * @param lst The pointer to the head of the linked list.
  * @param f The function to be applied to the content of the nodes.
  * @note The function f takes as a parameter the content of a node.
 */
@@ -521,7 +539,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 /**
  * @brief Create a new linked list obtained by applying the function f
  * to the content of each node of a linked list.
- * @param lst The pointer to the first node of the linked list.
+ * @param lst The pointer to the head of the linked list.
  * @param f The function to be applied to the content of the nodes.
  * @param del The function to be applied in case of failure.
  * @return The new linked list created or NULL if the allocation fails.
@@ -529,5 +547,22 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
  * @note The function del is applied to the content of each node in case
 */
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/**
+ * @brief Add a new node at the beginning of a double linked list.
+ * @param lst The pointer to the head of the linked list.
+ * @param new The pointer to the new node to be added.
+ * @note The pointer to the first node of the linked list is updated.
+*/
+void	ft_dlstadd_front(t_list **lst, t_list *new);
+
+/**
+ * @brief Add a new node at the end of a double linked list.
+ * @param lst The pointer to the first node of the linked list.
+ * @param new The pointer to the new node to be added.
+ * @note If the list is empty, the pointer to the head of the
+ * linked list is updated.
+*/
+void	ft_dlstadd_back(t_list **lst, t_list *new);
 
 #endif /* LIBFT_H */
