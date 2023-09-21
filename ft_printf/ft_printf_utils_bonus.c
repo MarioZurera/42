@@ -3,68 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 13:43:36 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/14 20:10:54 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/21 19:46:25 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/21 20:33:39 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	eval_char(va_list arg)
+int	eval_char(va_list arg, char *flags)
 {
-	char	c;
+	unsigned char	c;
+	int				i;
+	int				n;
 
-	c = (char) va_arg(arg, int);
+	i = 0;
+	while (flags[i] && !ft_strchr(".#0+ ", flags[i]) &&
+		   	(!ft_isdigit(flags[i]) || flags[i] == '0'))
+		i++;
+	if (!ft_isdigit(flags[i]) || flags != '0')
+		return (-1);
+
+	c = (unsigned char) va_arg(arg, int);
+
 	ft_putchar_fd(c, 1);
+	return (1);
 }
 
-void	eval_string(va_list arg, char flag)
+int	eval_string(va_list arg)
 {
-	char	*s;
+	const char	*s;
 
-	s = va_arg(arg, char *);
-	if (flag == ' ' && !*s)
-		ft_putchar_fd(' ', 1);
+	s = va_arg(arg, const char *);
+	if (s == NULL)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (ft_strlen("(null)"));
+	}
 	else
+	{
 		ft_putstr_fd(s, 1);
+		return (ft_strlen(s));
+	}
 }
 
-void	eval_pointer(va_list arg, char flag)
+int	eval_pointer(va_list arg)
 {
 	void			*ptr;
 	unsigned long	addr;
+	int				printed_chars;
 
 	ptr = va_arg(arg, void *);
 	addr = (unsigned long) ptr;
-	if (flag == '+' && addr > 0)
-		ft_putchar_fd('+', 1);
-	if (flag == ' ' && addr > 0)
-		ft_putchar_fd(' ', 1);
-	print_hex(addr, 'A');
+	ft_putstr_fd("0x", 1);
+	printed_chars = ft_strlen("0x");
+	print_hex(addr, 'a', &printed_chars);
+	return (printed_chars);
 }
 
-void	eval_decimal(va_list arg, char flag)
+int	eval_decimal(va_list arg)
 {
 	int	d;
+	int	printed_chars;
 
 	d = va_arg(arg, int);
-	if (flag == '+' && d > 0)
-		ft_putchar_fd('+', 1);
-	if (flag == ' ' && d > 0)
-		ft_putchar_fd(' ', 1);
 	ft_putnbr_fd(d, 1);
+	printed_chars = ft_nbrlen(d);
+	return (printed_chars);
 }
 
-void	eval_unsigned(va_list arg, char flag)
+int	eval_unsigned(va_list arg)
 {
-	unsigned int	d;
+	unsigned int	u;
+	int				printed_chars;
 
-	d = va_arg(arg, unsigned int);
-	if (flag == '+')
-		ft_putchar_fd('+', 1);
-	if (flag == ' ')
-		ft_putchar_fd(' ', 1);
-	ft_putnbr_fd(d, 1);
+	u = va_arg(arg, unsigned int);
+	ft_putunbr_fd(u, 1);
+	printed_chars = ft_unbrlen(u);
+	return (printed_chars);
 }
