@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/19 17:28:19 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:11:56 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,9 @@ int		ft_strlcat(char *dest, const char *src, size_t size);
  * if the char is not found.
 */
 char	*ft_strchr(const char *s, int c);
+
+char	*ft_strnchr(const char *s, int c, int n);
+char	*ft_strdelchr(const char *s, int c);
 
 /**
  * @brief Locate the last occurrence of the character c 

@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdelchr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 16:33:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/22 18:59:11 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/22 18:20:56 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/22 18:20:57 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strdelchr(char *str, char c)
 {
-	char	*s;
+	int	i;
+	int	j;
 
-	s = "Hola";
-	printf("%.d", 1);
-	printf("\n");
-	return (0);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] != c)
+			str[j++] = str[i];
+		i++;
+	}
+	str[j] = '\0';
+	return (str);
 }

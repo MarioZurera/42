@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 16:33:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/22 18:59:11 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/22 18:49:20 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/22 18:50:38 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strnchr(const char *s, int c, int n)
 {
-	char	*s;
+	int	i;
 
-	s = "Hola";
-	printf("%.d", 1);
-	printf("\n");
-	return (0);
+	c %= 128;
+	i = 0;
+	while (s[i] && s[i] != c && i < n)
+		++i;
+	if (s[i] != c)
+		return (NULL);
+	return ((char *) &s[i]);
 }

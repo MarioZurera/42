@@ -3,31 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 19:41:29 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/21 19:44:03 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/22 19:04:54 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/22 19:08:40 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
 # include <stdarg.h>
 # include "libft/libft.h"
 
+typedef struct s_conversion
+{
+	char	*flags;
+	int		length;
+	int		precision;
+}	t_conversion;
+
 int		ft_printf(const char *format, ...);
 
-int		eval_conversion(const char *format, int pos, va_list arg);
-
-int		eval_char(va_list arg, char *flags);
-int		eval_string(va_list arg, char *flags);
-int		eval_pointer(va_list arg, char *flags);
-int		eval_decimal(va_list arg, char *flags);
-int		eval_unsigned(va_list arg, char *flags);
-int		eval_hexlow(va_list arg, char *flags);
-int		eval_hexup(va_list arg, char *flags);
+int		eval_conversion(const char *format, int *pos, va_list arg);
+int		eval_char(va_list arg, t_conversion *data);
+int		eval_string(va_list arg, t_conversion *data);
+int		eval_pointer(va_list arg, t_conversion *data);
+int		eval_decimal(va_list arg, t_conversion *data);
+int		eval_unsigned(va_list arg, t_conversion *data);
+int		eval_hexlow(va_list arg, t_conversion *data);
+int		eval_hexup(va_list arg, t_conversion *data);
 
 void	print_hex(unsigned long int addr, char letter, int *printed_chars);
+void	get_lengths(char *flags, va_list arg, int *length, int *prec);
+int		print(const char *format, int *pos, va_list arg, t_conversion *data);
 
-#endif /* FT_PRINTF_H */
+#endif /* FT_PRINTF_BONUS_H */

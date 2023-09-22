@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/19 17:28:19 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/22 19:05:54 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,9 @@ char	*ft_strchr(const char *s, int c);
  * NULL if the char is not found.
 */
 char	*ft_strrchr(const char *s, int c);
+
+char	*ft_strnchr(const char *s, int c, int n);
+char	*ft_strdelchr(char *s, int c);
 
 /**
  * @brief Locate the first occurrence of the string needle 

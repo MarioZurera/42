@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 19:46:25 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/21 20:33:39 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/22 18:06:42 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/22 18:06:43 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	eval_char(va_list arg, char *flg)
 	int				n;
 
 	i = 0;
-	while (flg[i] && !ft_strchr(".#0+ ", flg[i]) && !ft_isdigit(flg[i])
+	while (flg[i] && !ft_strchr(".#0+ ", flg[i]) && !ft_isdigit(flg[i]))
 		i++;
 	if (ft_strchr(".#0+ ", flg[i])
 		return (-1);
