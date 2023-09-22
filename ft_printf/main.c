@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:33:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/21 20:23:22 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/22 01:38:48 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 int	main(void)
 {
-	printf("%-9c hola", 'a');
+	char	*s;
+
+	s = "Hola";
+	printf("%11.1d");
 	printf("\n");
 	return (0);
 }
