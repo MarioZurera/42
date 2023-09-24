@@ -6,45 +6,52 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 18:06:42 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/22 18:06:43 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/09/24 07:03:37 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	eval_char(va_list arg, char *flg)
+int	eval_char(va_list arg, t_conversion *data)
 {
-	unsigned char	c;
-	int				i;
-	int				n;
+	int	n_print;
 
-	i = 0;
-	while (flg[i] && !ft_strchr(".#0+ ", flg[i]) && !ft_isdigit(flg[i]))
-		i++;
-	if (ft_strchr(".#0+ ", flg[i])
+	if (ft_strlen(data->flag) == 1 && data->flag[0] == '-')
+	{
+		ft_putchar_fd(va_arg(arg, int), 1);
+		n_print = ft_pad(ft_max(0, data->length - 1));
+	}
+	else if (ft_strlen(data->flag) > 1)
 		return (-1);
-
-	c = (unsigned char) va_arg(arg, int);
-
-	ft_putchar_fd(c, 1);
-	return (1);
+	else
+	{
+		n_print = print_padding(ft_max(0, data->length - 1));
+		ft_putchar_fd(va_arg(arg, int), 1);
+	}
+	n_print++;
+	return (n_print);
 }
 
 int	eval_string(va_list arg)
 {
-	const char	*s;
+	char	*s;
 
-	s = va_arg(arg, const char *);
+	s = (char *) va_arg(arg, const char *);
+	if (!check_flags(data->flags. "- "))
+		return (-1);
 	if (s == NULL)
-	{
-		ft_putstr_fd("(null)", 1);
-		return (ft_strlen("(null)"));
-	}
-	else
-	{
-		ft_putstr_fd(s, 1);
-		return (ft_strlen(s));
-	}
+		s = "(null)";
+	if (data->precision > -1 && data->precision < ft_strlen(s))
+		s[data->precision] = '\0';
+	if (strnstr(data->flags, ' ', 2) != 0 && str[0] == '\0')
+		s = " ":
+	if (strnstr(data->flags. '-', 2) == 0)
+		n_print = ft_pad(ft_max(0, data->length - ft_strlen(s)));
+	ft_putstr_fd(s, 1);
+	if (strnstr(data->flags, '-', 2) != 0)
+		n_print = ft_pad(ft_max(0, data->length - ft_strlen(s)));
+	n_print += ft_strlen(s);
+	return (n_print);
 }
 
 int	eval_pointer(va_list arg)
