@@ -78,7 +78,7 @@ int	check_flags(char *flags, char *set)
 {
 	while (*flags)
 	{
-		if (ft_strchr(set, *flags))
+		if (!ft_strchr(set, *flags))
 			return (0);
 		flags++;
 	}

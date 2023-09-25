@@ -36,6 +36,10 @@ int		eval_hexup(va_list arg, t_conversion *data);
 
 void	print_hex(unsigned long int addr, char letter);
 void	get_lengths(char *flags, va_list arg, int *length, int *prec);
-int		print(const char *format, int *pos, va_list arg, t_conversion *data);
+int		ft_conversion(const char *format, int *pos, va_list arg,
+			t_conversion *data);
+int		padding(int length, char c);
+int		ft_hexlen(unsigned long int addr);
+int		check_flags(char *flags, char *valid_flags);
 
 #endif /* FT_PRINTF_BONUS_H */

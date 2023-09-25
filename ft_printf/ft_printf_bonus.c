@@ -75,6 +75,7 @@ static t_conversion	*eval_flags(const char *format, int *pos, va_list arg)
 	if (data->flags == NULL)
 		return (NULL);
 	format_flags(data, arg);
+	return (data);
 }
 
 int	eval_conversion(const char *format, int *pos, va_list arg)
@@ -87,6 +88,8 @@ int	eval_conversion(const char *format, int *pos, va_list arg)
 	if (data == NULL)
 		return (-1);
 	ft_conversion(format, pos, arg, data);
+	free(data->flags);
+	free(data);
 	return (printed_chars);
 }
 

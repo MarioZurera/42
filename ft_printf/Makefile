@@ -33,12 +33,12 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OBJS)
+bonus: $(BONOBJS)
 	make all -C $(LIB_DIR)/
 	mv $(LIB_DIR)/$(LIBFT) $(NAME) 
-	$(LIBC) $(NAME) $(OBJS)
+	$(LIBC) $(NAME) $(BONOBJS)
 
-test: $(NAME)
+test: bonus
 	$(CC) $(CFLAGS) -o main.o -I $(INCS) -c main.c
 	$(CC) $(CFLAGS) -o test main.o -L. -lftprintf
 	./test
