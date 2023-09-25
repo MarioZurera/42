@@ -3,7 +3,7 @@ SRCS	= ft_printf.c ft_printf_utils.c \
 		  ft_printf_utils2.c
 OBJS	= $(SRCS:.c=.o)
 BONUS	= ft_printf_bonus.c ft_printf_utils_bonus.c \
-		  ft_printf_utils2_bonus.c
+		  ft_printf_utils2_bonus.c ft_printf_utils3_bonus.c
 BONOBJS	= $(BONUS:.c=.o)
 NAME	= libftprintf.a
 CFLAGS	= -Wall -Wextra -Werror
@@ -29,7 +29,7 @@ clean:
 	make fclean -C $(LIB_DIR)
 
 fclean: clean
-	$(RM) $(NAME) $(LIBFT)
+	$(RM) $(NAME)
 
 re: fclean all
 

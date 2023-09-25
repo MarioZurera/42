@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 19:01:58 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/22 19:02:03 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/25 13:56:15 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/25 13:56:16 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,11 @@ int	eval_conversion(const char *format, int *pos, va_list arg)
 	int				printed_chars;
 	t_conversion	*data;
 
-	data = eval_flags(format, pos);
+	printed_chars = 0;
+	data = eval_flags(format, pos, arg);
 	if (data == NULL)
 		return (-1);
-	printed_chars = 0; 
-	if (format[*pos] == 'c') // printed_chars = print_conversion(format, *pos, arg, t_flags);
-		printed_chars = eval_char(arg, data);
-	else if (format[*pos] == 's')
-		printed_chars = eval_string(arg, data);
-	else if (format[*pos] == 'p')
-		printed_chars = eval_pointer(arg, data);
-	else if (format[*pos] == 'd' || format[*pos] == 'i')
-		printed_chars = eval_decimal(arg, data);
-	else if (format[*pos] == 'u')
-		printed_chars = eval_unsigned(arg, data);
-	else if (format[*pos] == 'x')
-		printed_chars = eval_hexlow(arg, data);
-	else if (format[*pos] == 'X')
-		printed_chars = eval_hexup(arg, data);
-	else if (format[*pos] == '%')
-	{
-		++printed_chars;
-		ft_putchar_fd('%', 1);
-	} // END
+	ft_conversion(format, pos, arg, data);
 	return (printed_chars);
 }
 
@@ -122,7 +104,8 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[pos] == '%')
 		{
-			temp = eval_conversion(format, &(++pos), arg);
+			++pos;
+			temp = eval_conversion(format, &pos, arg);
 			if (temp < 0)
 				return (-1);
 			printed_chars += temp - 1;

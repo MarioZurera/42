@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils3_bonus.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/25 13:56:55 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/25 13:56:57 by mzurera-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
 
 void	get_lengths(char *flags, va_list arg, int *length, int *prec)
@@ -25,28 +37,63 @@ void	get_lengths(char *flags, va_list arg, int *length, int *prec)
 	flags[j] = '\0';
 }
 
-int		print_conversion(const char *format, int *pos, va_list arg, t_conversion *flags)
+int	ft_conversion(const char *format, int *pos, va_list arg, t_conversion *data)
 {
-    char    printed_chars;
+	int	n_print;
 
-    printed_chars = 0;
-    if (format[*pos] == 'c')
-		printed_chars = eval_char(arg, data);
+	n_print = 0;
+	if (format[*pos] == 'c')
+		n_print = eval_char(arg, data);
 	else if (format[*pos] == 's')
-		printed_chars = eval_string(arg, data);
+		n_print = eval_string(arg, data);
 	else if (format[*pos] == 'p')
-		printed_chars = eval_pointer(arg, data);
+		n_print = eval_pointer(arg, data);
 	else if (format[*pos] == 'd' || format[*pos] == 'i')
-		printed_chars = eval_decimal(arg, data);
+		n_print = eval_decimal(arg, data);
 	else if (format[*pos] == 'u')
-		printed_chars = eval_unsigned(arg, data);
+		n_print = eval_unsigned(arg, data);
 	else if (format[*pos] == 'x')
-		printed_chars = eval_hexlow(arg, data);
+		n_print = eval_hexlow(arg, data);
 	else if (format[*pos] == 'X')
-		printed_chars = eval_hexup(arg, data);
+		n_print = eval_hexup(arg, data);
 	else if (format[*pos] == '%')
 	{
-		++printed_chars;
+		++n_print;
 		ft_putchar_fd('%', 1);
 	}
+	return (n_print);
+}
+
+int	padding(int n, char c)
+{
+	int	m;
+
+	m = n;
+	while (m--)
+		ft_putchar_fd(c, 1);
+	return (n);
+}
+
+int	check_flags(char *flags, char *set)
+{
+	while (*flags)
+	{
+		if (ft_strchr(set, *flags))
+			return (0);
+		flags++;
+	}
+	return (1);
+}
+
+int	ft_hexlen(unsigned long n)
+{
+	int	length;
+
+	length = 0;
+	while (n)
+	{
+		n /= 16;
+		length++;
+	}
+	return (length);
 }

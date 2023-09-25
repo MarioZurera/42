@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 19:04:54 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/22 19:08:40 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/09/25 13:56:03 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/09/25 13:56:04 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		eval_unsigned(va_list arg, t_conversion *data);
 int		eval_hexlow(va_list arg, t_conversion *data);
 int		eval_hexup(va_list arg, t_conversion *data);
 
-void	print_hex(unsigned long int addr, char letter, int *printed_chars);
+void	print_hex(unsigned long int addr, char letter);
 void	get_lengths(char *flags, va_list arg, int *length, int *prec);
 int		print(const char *format, int *pos, va_list arg, t_conversion *data);
 

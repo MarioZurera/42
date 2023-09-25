@@ -18,7 +18,7 @@ int	main(void)
 	char	*s;
 
 	s = "Hola";
-	printf("%.d", 1);
+	printf("| %p |", s);
 	printf("\n");
 	return (0);
 }
