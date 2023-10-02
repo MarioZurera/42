@@ -12,10 +12,20 @@
 
 #include "libft.h"
 
-void	ft_putstr_fd(const char *s, int fd)
+int	ft_putstr_fd(const char *s, int fd)
 {
+	int	length;
+
+	length = 0;
 	if (s == NULL)
-		ft_putstr_fd("(null)", fd);
+		length = ft_putstr_fd("(null)", fd);
+	if (length < 0)
+		return (-1);
 	while (s && *s)
-		write(fd, s++, 1);
+	{
+		if (write(fd, s++, 1) <= 0)
+			return (-1);
+		length++;
+	}
+	return (length);
 }

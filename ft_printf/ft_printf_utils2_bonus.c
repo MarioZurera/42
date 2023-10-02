@@ -12,18 +12,22 @@
 
 #include "ft_printf_bonus.h"
 
-void	print_hex(unsigned long int addr, char letter)
+int	print_hex(unsigned long int n, char letter)
 {
 	char	hex;
+	int		length;
 
-	hex = addr % 16;
-	if (addr >= 16)
-		print_hex(addr / 16, letter);
+	length = 0;
+	hex = n % 16;
+	if (n >= 16)
+		length = print_hex(n / 16, letter);
 	if (hex < 10)
 		hex += '0';
 	else
 		hex += (letter - 10);
-	ft_putchar_fd(hex, 1);
+	if (length < 0 || ft_putchar_fd(hex, 1) < 0)
+		return (-1);
+	return (length + 1);
 }
 
 int	eval_hexlow(va_list arg, t_conversion *data)

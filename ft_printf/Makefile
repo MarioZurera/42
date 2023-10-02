@@ -3,7 +3,8 @@ SRCS	= ft_printf.c ft_printf_utils.c \
 		  ft_printf_utils2.c
 OBJS	= $(SRCS:.c=.o)
 BONUS	= ft_printf_bonus.c ft_printf_utils_bonus.c \
-		  ft_printf_utils2_bonus.c ft_printf_utils3_bonus.c
+		  ft_printf_utils2_bonus.c ft_printf_utils3_bonus.c \
+		  ft_printf_utils4_bonus.c
 BONOBJS	= $(BONUS:.c=.o)
 NAME	= libftprintf.a
 CFLAGS	= -Wall -Wextra -Werror
@@ -39,8 +40,8 @@ bonus: $(BONOBJS)
 	$(LIBC) $(NAME) $(BONOBJS)
 
 test: bonus
-	$(CC) $(CFLAGS) -o main.o -I $(INCS) -c main.c
-	$(CC) $(CFLAGS) -o test main.o -L. -lftprintf
+	$(CC) -o main.o -I $(INCS) -c main.c
+	$(CC) -o test main.o -L. -lftprintf
 	./test
 	$(RM) test main.o
 

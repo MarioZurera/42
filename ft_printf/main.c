@@ -11,18 +11,10 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	main(void)
 {
-	int	a;
-	int	b;
-
-	a = printf("%02d", 0);
-	printf("\n");
-	printf("%d\n", a);
-	b = ft_printf("%02d", 0);
-	ft_printf("\n");
-	ft_printf("%d\n", a);
+	ft_printf(" %.2d ", -1);
 	return (0);
 }

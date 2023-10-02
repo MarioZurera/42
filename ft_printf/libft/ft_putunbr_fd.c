@@ -12,9 +12,14 @@
 
 #include "libft.h"
 
-void	ft_putunbr_fd(unsigned int n, int fd)
+int	ft_putunbr_fd(unsigned int n, int fd)
 {
+	int	length;
+
+	length = 0;
 	if (n >= 10)
-		ft_putunbr_fd(n / 10, fd);
-	ft_putchar_fd((n % 10) + '0', fd);
+		length = ft_putunbr_fd(n / 10, fd);
+	if (length < 0 || ft_putchar_fd((n % 10) + '0', fd) <= 0)
+		return (-1);
+	return (length + 1);
 }

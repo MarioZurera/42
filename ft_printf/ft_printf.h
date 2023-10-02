@@ -28,6 +28,6 @@ int		eval_unsigned(va_list arg);
 int		eval_hexlow(va_list arg);
 int		eval_hexup(va_list arg);
 
-void	print_hex(unsigned long int addr, char letter, int *printed_chars);
+int		print_hex(unsigned long int addr, char letter);
 
 #endif /* FT_PRINTF_H */

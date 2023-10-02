@@ -11,28 +11,33 @@
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+#include <stdio.h>
 
-void	get_lengths(char *flags, va_list arg, int *length, int *prec)
+void	get_lengths(char *flags, va_list arg, unsigned int *length, int *prec)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (flags[i] && !ft_isdigit(flags[i]) && !ft_strchr("0.", flags[i]))
-		i++;
+	i = ignore_flags(flags);
 	j = i;
 	if (ft_isdigit(flags[i]))
-		*length = ft_atoi(&flags[i]);
-	else if (flags[i] == '*')
-		*length = va_arg(arg, int);
-	i += ft_nbrlen(*length);
-	if (flags[i] == '.')
 	{
+		*length = ft_atoi(&flags[i]);
+		i += ft_unbrlen(*length);
+	}
+	else if (flags[i] == '*')
+	{
+		*length = va_arg(arg, int);
 		++i;
+	}
+	if (flags[i++] == '.')
+	{
 		if (ft_isdigit(flags[i]))
-			*prec = ft_atoi(&flags[i + 1]);
+			*prec = ft_atoi(&flags[i]);
 		else if (flags[i] == '*')
 			*prec = va_arg(arg, int);
+		else
+			*prec = 0;
 	}
 	flags[j] = '\0';
 }
@@ -70,7 +75,8 @@ int	padding(int n, char c)
 
 	m = n;
 	while (m--)
-		ft_putchar_fd(c, 1);
+		if (ft_putchar_fd(c, 1) == -1)
+			return (-1);
 	return (n);
 }
 
@@ -90,6 +96,8 @@ int	ft_hexlen(unsigned long n)
 	int	length;
 
 	length = 0;
+	if (n == 0)
+		++length;
 	while (n)
 	{
 		n /= 16;

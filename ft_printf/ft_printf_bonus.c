@@ -49,19 +49,18 @@ static void	format_flags(t_conversion *data, va_list arg)
 	flg = data->flags;
 	while (flg[i])
 	{
-		if (ft_isdigit(flg[i]) || !ft_strnchr(flg, flg[i], j))
+		if (ft_isdigit(flg[i]) || j == 0 || !ft_strnchr(flg, flg[i], j - 1))
 		{
 			flg[j] = flg[i];
 			j++;
 		}
 		i++;
 	}
-	flg[j] = '\0';
+	get_lengths(flg, arg, &data->length, &data->precision);
 	if (ft_strchr(flg, '0') && ft_strchr(flg, '-'))
 		ft_strdelchr(flg, '0');
 	if (ft_strchr(flg, ' ') && ft_strchr(flg, '+'))
 		ft_strdelchr(flg, ' ');
-	get_lengths(flg, arg, &data->length, &data->precision);
 }
 
 static t_conversion	*eval_flags(const char *format, int *pos, va_list arg)
@@ -71,6 +70,8 @@ static t_conversion	*eval_flags(const char *format, int *pos, va_list arg)
 	data = (t_conversion *) malloc(sizeof(t_conversion));
 	if (data == NULL)
 		return (NULL);
+	data->length = 0;
+	data->precision = -1;
 	data->flags = get_flags(format, pos);
 	if (data->flags == NULL)
 		return (NULL);
@@ -87,7 +88,7 @@ int	eval_conversion(const char *format, int *pos, va_list arg)
 	data = eval_flags(format, pos, arg);
 	if (data == NULL)
 		return (-1);
-	ft_conversion(format, pos, arg, data);
+	printed_chars = ft_conversion(format, pos, arg, data);
 	free(data->flags);
 	free(data);
 	return (printed_chars);
@@ -109,13 +110,12 @@ int	ft_printf(const char *format, ...)
 		{
 			++pos;
 			temp = eval_conversion(format, &pos, arg);
-			if (temp < 0)
-				return (-1);
-			printed_chars += temp - 1;
 		}
 		else
-			ft_putchar_fd(format[pos], 1);
-		++printed_chars;
+			temp = ft_putchar_fd(format[pos], 1);
+		if (temp < 0)
+			return (-1);
+		printed_chars += temp;
 		++pos;
 	}
 	va_end(arg);
