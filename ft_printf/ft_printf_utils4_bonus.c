@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 13:56:55 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/25 13:56:57 by mzurera-         ###   ########.fr       */
+/*   Created: 2023/10/03 17:36:02 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/10/03 18:16:02 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,24 @@ void	add_n(int *n_print, int res)
 		*n_print += res;
 }
 
-void	print_sign(int d, int *n_print, int *n_print_unsign, char *flags)
+void	print_sign(int d, int *n_print, char *flags)
 {
-	*n_print_unsign = *n_print;
 	if (d < 0)
 		add_n(n_print, ft_putchar_fd('-', 1));
 	else if (ft_strchr(flags, '+') != 0)
 		add_n(n_print, ft_putchar_fd('+', 1));
 	else if (ft_strchr(flags, ' ') != 0)
 		add_n(n_print, ft_putchar_fd(' ', 1));
+}
+
+void	print_sign_u(int *n_print, char *flags) {
+	if (ft_strchr(flags, '+') != 0)
+		add_n(n_print, ft_putchar_fd('+', 1));
+	else if (ft_strchr(flags, ' ') != 0)
+		add_n(n_print, ft_putchar_fd(' ', 1));
+}
+
+int	has_sign(char *flags)
+{
+	return (ft_strchr(flags, '+') || ft_strchr(flags, ' '));
 }

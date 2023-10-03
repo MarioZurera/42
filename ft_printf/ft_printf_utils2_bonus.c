@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:41:02 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/25 14:41:03 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:58:23 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,30 @@ int	eval_hexlow(va_list arg, t_conversion *data)
 {
 	unsigned int	hex;
 	int				n_print;
+	int				has_hashtag;
 
 	if (!check_flags(data->flags, "#0-"))
 		return (-1);
 	hex = va_arg(arg, unsigned int);
 	n_print = ft_hexlen(hex);
-	if (ft_strchr(data->flags, '#') != 0 && hex != 0)
-		n_print += 2;
-	if (ft_strchr(data->flags, '-') == 0)
-	{
-		if (ft_strchr(data->flags, '0') != 0)
-			n_print += padding(ft_max(0, data->length - n_print), '0');
-		else
-			n_print += padding(ft_max(0, data->length - n_print), ' ');
-	}
-	if (ft_strchr(data->flags, '#') != 0 && hex != 0)
-		ft_putstr_fd("0x", 1);
-	print_hex(hex, 'a');
+	if (data->precision == 0 && hex == 0)
+		n_print = 0;
+	has_hashtag = 2 * (ft_strchr(data->flags, '#') != 0 && hex != 0);
+	if (has_hashtag)
+		add_n(&n_print, 2);
+	if (ft_strchr(data->flags, '-') == 0 && (ft_strchr(data->flags, '0') == 0 || data->precision >= 0))
+		add_n(&n_print, padding(ft_max(0, data->length
+					- n_print - ft_max(0, data->precision - (n_print - has_hashtag))), ' '));
+	if (has_hashtag)
+		add_n(&n_print, ft_putstr_fd("0x", 1) - 2);
+	if (ft_strchr(data->flags, '0') != 0 && data->precision < 0)
+		add_n(&n_print, padding(ft_max(0, data->length - n_print), '0'));
+	if (data->precision >= 0)
+		add_n(&n_print, padding(ft_max(0, data->precision - ft_hexlen(hex)), '0'));
+	if (data->precision != 0 || hex != 0)
+		add_n(&n_print, print_hex(hex, 'a') - ft_hexlen(hex));
 	if (ft_strchr(data->flags, '-') != 0)
-		n_print += padding(ft_max(0, data->length - n_print), ' ');
+		add_n(&n_print, padding(ft_max(0, data->length - n_print), ' '));
 	return (n_print);
 }
 
@@ -60,24 +65,29 @@ int	eval_hexup(va_list arg, t_conversion *data)
 {
 	unsigned int	hex;
 	int				n_print;
+	int				has_hashtag;
 
 	if (!check_flags(data->flags, "#0-"))
 		return (-1);
 	hex = va_arg(arg, unsigned int);
 	n_print = ft_hexlen(hex);
-	if (ft_strchr(data->flags, '#') != 0 && hex != 0)
-		n_print += 2;
-	if (ft_strchr(data->flags, '-') == 0)
-	{
-		if (ft_strchr(data->flags, '0') != 0)
-			n_print += padding(ft_max(0, data->length - n_print), '0');
-		else
-			n_print += padding(ft_max(0, data->length - n_print), ' ');
-	}
-	if (ft_strchr(data->flags, '#') != 0 && hex != 0)
-		ft_putstr_fd("0X", 1);
-	print_hex(hex, 'A');
+	if (data->precision == 0 && hex == 0)
+		n_print = 0;
+	has_hashtag = 2 * (ft_strchr(data->flags, '#') != 0 && hex != 0);
+	if (has_hashtag)
+		add_n(&n_print, 2);
+	if (ft_strchr(data->flags, '-') == 0 && (ft_strchr(data->flags, '0') == 0 || data->precision >= 0))
+		add_n(&n_print, padding(ft_max(0, data->length
+					- n_print - ft_max(0, data->precision - (n_print - has_hashtag))), ' '));
+	if (has_hashtag)
+		add_n(&n_print, ft_putstr_fd("0X", 1) - 2);
+	if (ft_strchr(data->flags, '0') != 0 && data->precision < 0)
+		add_n(&n_print, padding(ft_max(0, data->length - n_print), '0'));
+	if (data->precision >= 0)
+		add_n(&n_print, padding(ft_max(0, data->precision - ft_hexlen(hex)), '0'));
+	if (data->precision != 0 || hex != 0)
+		add_n(&n_print, print_hex(hex, 'A') - ft_hexlen(hex));
 	if (ft_strchr(data->flags, '-') != 0)
-		n_print += padding(ft_max(0, data->length - n_print), ' ');
+		add_n(&n_print, padding(ft_max(0, data->length - n_print), ' '));
 	return (n_print);
 }

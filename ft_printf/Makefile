@@ -4,7 +4,7 @@ SRCS	= ft_printf.c ft_printf_utils.c \
 OBJS	= $(SRCS:.c=.o)
 BONUS	= ft_printf_bonus.c ft_printf_utils_bonus.c \
 		  ft_printf_utils2_bonus.c ft_printf_utils3_bonus.c \
-		  ft_printf_utils4_bonus.c
+		  ft_printf_utils4_bonus.c ft_printf_utils5_bonus.c
 BONOBJS	= $(BONUS:.c=.o)
 NAME	= libftprintf.a
 CFLAGS	= -Wall -Wextra -Werror
@@ -36,13 +36,14 @@ re: fclean all
 
 bonus: $(BONOBJS)
 	make all -C $(LIB_DIR)/
-	mv $(LIB_DIR)/$(LIBFT) $(NAME) 
+	cp $(LIB_DIR)/$(LIBFT) $(NAME) 
 	$(LIBC) $(NAME) $(BONOBJS)
 
 test: bonus
-	$(CC) -o main.o -I $(INCS) -c main.c
-	$(CC) -o test main.o -L. -lftprintf
-	./test
-	$(RM) test main.o
+	@$(CC) -o main.o -I $(INCS) -c main.c
+	@$(CC) -o test main.o -L. -lftprintf
+	@./test
+	@echo "\n"
+	@$(RM) test main.o
 
 .PHONY: all bonus clean fclean re .c.o

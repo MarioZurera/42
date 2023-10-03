@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:33:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/09/25 14:52:47 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/03 20:18:19 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	main(void)
 {
-	ft_printf(" %.2d ", -1);
+
+	ft_printf("percent 4 %0%");
 	return (0);
 }
