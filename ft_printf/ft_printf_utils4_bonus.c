@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:36:02 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/03 18:16:02 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:50:42 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ignore_flags(char *flags)
 
 	i = 0;
 	while (flags[i] && (!ft_isdigit(flags[i])
-			|| flags[i] == '0') && flags[i] != '.')
+			|| flags[i] == '0') && flags[i] != '.' && flags[i] != '*')
 		i++;
 	return (i);
 }

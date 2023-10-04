@@ -6,11 +6,12 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:56:15 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/03 20:25:09 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:46:42 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+#include <stdio.h>
 
 static char	*get_flags(const char *format, int *pos)
 {
@@ -26,9 +27,13 @@ static char	*get_flags(const char *format, int *pos)
 		(*pos)++;
 	while (ft_isdigit(format[*pos]))
 		(*pos)++;
+	if (format[*pos] == '*')
+		(*pos)++;
 	if (format[*pos] == '.')
 		(*pos)++;
 	while (ft_isdigit(format[*pos]))
+		(*pos)++;
+	if (format[*pos] == '*')
 		(*pos)++;
 	if (!ft_strchr(conversions, format[*pos]))
 		return (NULL);
@@ -49,7 +54,7 @@ static void	format_flags(t_conversion *data, va_list arg)
 	flg = data->flags;
 	while (flg[i])
 	{
-		if (ft_isdigit(flg[i]) || j == 0 || !ft_strnchr(flg, flg[i], j - 1))
+		if (flg[i] == '*' || ft_isdigit(flg[i]) || j == 0 || !ft_strnchr(flg, flg[i], j - 1))
 		{
 			flg[j] = flg[i];
 			j++;

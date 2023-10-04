@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/**                                                        :::      ::::::::   */
+/*                                                        :::      ::::::::   */
 /*   ft_printf_utils3_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:56:55 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/03 19:39:35 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/04 18:51:04 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+#include <stdio.h>
 
 void	get_lengths(char *flags, va_list arg, unsigned int *length, int *prec)
 {
