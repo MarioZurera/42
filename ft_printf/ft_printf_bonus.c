@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:56:15 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/05 18:45:43 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:12:39 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ static char	*get_flags(const char *format, int *pos)
 		(*pos)++;
 	while (ft_isdigit(format[*pos]))
 		(*pos)++;
-	if (format[*pos] == '*')
-		(*pos)++;
-	if (format[*pos] == '.')
+	if (format[*pos] == '.' || format[*pos] == '*')
 		(*pos)++;
 	while (ft_isdigit(format[*pos]))
 		(*pos)++;
@@ -54,7 +52,8 @@ static void	format_flags(t_conversion *data, va_list arg)
 	flg = data->flags;
 	while (flg[i])
 	{
-		if (flg[i] == '*' || ft_isdigit(flg[i]) || j == 0 || !ft_strnchr(flg, flg[i], j - 1))
+		if (flg[i] == '*' || ft_isdigit(flg[i])
+			|| j == 0 || !ft_strnchr(flg, flg[i], j - 1))
 		{
 			flg[j] = flg[i];
 			j++;
@@ -113,7 +112,7 @@ int	ft_printf(const char *format, ...)
 	va_start(arg, format);
 	printed_chars = 0;
 	pos = 0;
-	while (format[pos])
+	while (format[pos] && printed_chars >= 0)
 	{
 		if (format[pos] == '%')
 		{
@@ -122,12 +121,9 @@ int	ft_printf(const char *format, ...)
 		}
 		else
 			temp = ft_putchar_fd(format[pos], 1);
-		if (temp < 0)
-		{
-			va_end(arg);
-			return (-1);
-		}
 		printed_chars += temp;
+		if (temp < 0)
+			printed_chars = -1;
 		++pos;
 	}
 	va_end(arg);

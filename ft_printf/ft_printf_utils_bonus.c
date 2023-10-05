@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:56:47 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/05 18:39:49 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:18:11 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,15 @@ int	eval_decimal(va_list arg, t_conversion *data)
 	n_print = ft_unbrlen(ft_abs(d));
 	if (data->precision == 0 && d == 0)
 		n_print = 0;
-	if (ft_strchr(data->flags, '-') == 0 && (ft_strchr(data->flags, '0') == 0 || data->precision >= 0))
+	if (ft_strchr(data->flags, '-') == 0 && (ft_strchr(data->flags, '0') == 0
+			|| data->precision >= 0))
 		add_n(&n_print, padding(ft_max(0, data->length
-					- n_print - ft_max(0, data->precision - n_print) - (has_sign(data->flags) || (d < 0))), ' '));
+					- n_print - ft_max(0, data->precision - n_print)
+					- (has_sign(data->flags) || (d < 0))), ' '));
 	print_sign(d, &n_print, data->flags);
 	if (data->precision >= 0)
-		add_n(&n_print, padding(ft_max(0, data->precision - ft_unbrlen(ft_abs(d))), '0'));
+		add_n(&n_print, padding(ft_max(0, data->precision
+					- ft_unbrlen(ft_abs(d))), '0'));
 	else if (ft_strchr(data->flags, '0') != 0)
 		add_n(&n_print, padding(ft_max(0, data->length - n_print), '0'));
 	if (data->precision != 0 || d != 0)
@@ -113,14 +116,17 @@ int	eval_unsigned(va_list arg, t_conversion *data)
 	n_print = ft_unbrlen(u);
 	if (data->precision == 0 && u == 0)
 		n_print = 0;
-	if (ft_strchr(data->flags, '-') == 0 && (ft_strchr(data->flags, '0') == 0 || data->precision >= 0))
+	if (ft_strchr(data->flags, '-') == 0 && (ft_strchr(data->flags, '0') == 0
+			|| data->precision >= 0))
 		add_n(&n_print, padding(ft_max(0, data->length
-					- n_print - ft_max(0, data->precision - n_print) - has_sign(data->flags)), ' '));
+					- n_print - ft_max(0, data->precision
+						- n_print) - has_sign(data->flags)), ' '));
 	print_sign_u(&n_print, data->flags);
 	if (ft_strchr(data->flags, '0') != 0 && data->precision < 0)
 		add_n(&n_print, padding(ft_max(0, data->length - n_print), '0'));
 	if (data->precision >= 0)
-		add_n(&n_print, padding(ft_max(0, data->precision - ft_unbrlen(u)), '0'));
+		add_n(&n_print, padding(ft_max(0, data->precision
+					- ft_unbrlen(u)), '0'));
 	if (data->precision != 0 || u != 0)
 		add_n(&n_print, ft_putunbr_fd(u, 1) - ft_unbrlen(u));
 	if (ft_strchr(data->flags, '-') != 0)
