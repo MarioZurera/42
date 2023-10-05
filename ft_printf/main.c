@@ -6,17 +6,25 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:33:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/04 19:20:18 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:58:41 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "ft_printf_bonus.h"
 
+ssize_t write(int fd, const void *buf, size_t count)
+{
+	static int i;
+
+	if (i++ > 1) // Works with > 17
+		return (-1);
+	return (1);
+}
+
 int	main(void)
 {
-	ft_printf("%--120.50d%-%%-112.167X%-32.65u" ,-1355834522,3814946551u,404243169u);
-	ft_printf("\n");
-	printf("%--120.50d%-%%-112.167X%-32.65u" ,-1355834522,3814946551u,404243169u);
+	printf("RESULT: %d", ft_printf("%-5c, %-5c, %-5c", '5', 'x', '\n'));
+	os.system("leaks");
 	return (0);
 }

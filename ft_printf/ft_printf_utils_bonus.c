@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:56:47 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/03 19:59:38 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:39:49 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	eval_char(va_list arg, t_conversion *data)
 	else
 	{
 		add_n(&n_print, padding(ft_max(0, data->length - 1), ' '));
+		if (n_print == -1)
+			return (-1);
 		add_n(&n_print, ft_putchar_fd(va_arg(arg, int), 1));
 	}
 	return (n_print);

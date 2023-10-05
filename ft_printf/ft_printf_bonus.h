@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:56:03 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/03 19:36:09 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:50:34 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	add_n(int *n_print, int res);
 void	print_sign(int d, int *n_print, char *flags);
 void	print_sign_u(int *n_print, char *flags);
 int		has_sign(char *flags);
+ssize_t write(int fd, const void *buf, size_t count);
 
 #endif /* FT_PRINTF_BONUS_H */

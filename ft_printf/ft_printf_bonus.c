@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:56:15 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/04 18:46:42 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:45:43 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	format_flags(t_conversion *data, va_list arg)
 		}
 		i++;
 	}
+	flg[j] = '\0';
 	get_lengths(flg, arg, &data->length, &data->precision);
 	if (ft_strchr(flg, '0') && ft_strchr(flg, '-'))
 		ft_strdelchr(flg, '0');
@@ -79,7 +80,10 @@ static t_conversion	*eval_flags(const char *format, int *pos, va_list arg)
 	data->precision = -1;
 	data->flags = get_flags(format, pos);
 	if (data->flags == NULL)
+	{
+		free(data);
 		return (NULL);
+	}
 	format_flags(data, arg);
 	return (data);
 }
@@ -119,7 +123,10 @@ int	ft_printf(const char *format, ...)
 		else
 			temp = ft_putchar_fd(format[pos], 1);
 		if (temp < 0)
+		{
+			va_end(arg);
 			return (-1);
+		}
 		printed_chars += temp;
 		++pos;
 	}
