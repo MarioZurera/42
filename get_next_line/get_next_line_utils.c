@@ -12,11 +12,11 @@
 
 #include "get_next_line.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, unsigned int n)
 {
-	char	*c_dest;
-	char	*c_src;
-	size_t	i;
+	char			*c_dest;
+	char			*c_src;
+	unsigned int	i;
 
 	if (dest == NULL && src == NULL)
 		return (NULL);
@@ -69,8 +69,8 @@ int	ft_strlcat(char *dest, const char *src, unsigned int size)
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*str;
-	size_t	length;
+	char			*str;
+	unsigned int	length;
 
 	length = ft_strlen(s1) + ft_strlen(s2) + 1;
 	str = (char *) malloc(sizeof(char) * length);

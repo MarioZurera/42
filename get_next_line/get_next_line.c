@@ -18,11 +18,13 @@ static int	contains_new_line(char *buffer, char **str)
 	int		new_len;
 	char	*temp;
 
-	pos = ft_strchr_index(str, '\n');
+	pos = ft_strchr_index(*str, '\n');
 	new_len = ft_strlen(*str) - pos;
 	if (pos != -1)
 	{
-		ft_strlcpy(buffer, ft_substr(*str, pos, new_len), new_len);
+		temp = ft_substr(*str, pos, new_len);
+		ft_strlcpy(buffer, temp, new_len);
+		free(temp);
 		temp = ft_substr(*str, 0, pos);
 		if (temp == NULL)
 			return (0);
@@ -50,20 +52,31 @@ static int	contains_null_character(char *buffer, char **str)
 	return (pos < BUFFER_SIZE);
 }
 
-static int	read_line(char *buffer, char **str)
+static int	read_line(int fd, char *buffer, char **str)
 {
-	int	bytes;
+	int		bytes;
+	char	*temp_str;
 
 	if (buffer[0] == '\0')
 		bytes = read(fd, &buffer, BUFFER_SIZE);
 	else
-		bytes = 1;
+		bytes = ft_strlen(buffer);
 	while (bytes > 0)
 	{
-		str = ft_strjoin(str, buffer);
-		if (contains_new_line(buffer, &str))
+		temp_str = (char *) malloc(bytes + ft_strlen(*str) + 1);
+		if (temp_str == NULL)
+			return (0);
+		free(*str);
+		*str = temp_str;
+		ft_strlcpy(str, s1, length);
+		ft_strlcat(str, s2, length);
+		
+		if (temp_str == NULL)
+			return (0);
+		*str = temp_str;
+		if (contains_new_line(buffer, str))
 			break ;
-		if (contains_null_character(buffer, &str))
+		if (contains_null_character(buffer, str))
 			break ;
 		bytes = read(fd, &buffer, BUFFER_SIZE);
 	}
@@ -85,16 +98,23 @@ char	*get_next_line(int fd)
 	static char	buffer[BUFFER_SIZE + 1];
 	char		*str;
 	int			control;
+	/*char		*temp_str;*/
 
 	str = (char *) malloc(1 * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	str[0] = '\0';
-	control = read_line(buffer, &strs);
+	control = read_line(fd, buffer, &str);
 	if (!control)
 	{
 		buffer[0] = '\0';
+		free(str);
 		return (NULL);
 	}
+	/*temp_str = ft_strjoin(str, "\n");
+	free(str);
+	if (temp_str == NULL)
+		return (0);
+	str = temp_str;*/
 	return (str);
 }
