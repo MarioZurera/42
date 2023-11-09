@@ -20,8 +20,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-int				*ft_strlcpy(char *dest, const char *src, unsigned int size);
-int				*ft_strlcat(char *dest, const char *src, unsigned int size);
+int				ft_strlcpy(char *dest, const char *src, unsigned int size);
+int				ft_strlcat(char *dest, const char *src, unsigned int size);
 char			*ft_strjoin(const char *s1, const char *s2);
 int				ft_strchr_index(char *str, int c);
 char			*ft_substr(const char *s, unsigned int start, unsigned int len);
