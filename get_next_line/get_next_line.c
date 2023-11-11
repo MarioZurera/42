@@ -6,13 +6,11 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 13:18:53 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/11/11 18:29:32 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/11/11 19:12:56 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
 
 unsigned int	ft_strlen(const char *str)
 {
@@ -48,53 +46,15 @@ static int	contains_null_character(char *buffer, char **str)
 	int		pos;
 	char	*temp;
 
+	buffer[0] = '\0';
 	pos = ft_strlen(*str);
 	temp = ft_substr(*str, 0, pos);
 	if (temp == NULL)
 		return (0);
-	buffer[0] = '\0';
 	free(*str);
 	*str = temp;
 	return (1);
 }
-
-/*static int	read_line(int fd, char *buffer, char **str)
-{
-	int		bytes;
-	int		str_len;
-	char	*temp_str;
-	int		eof;
-
-	eof = 0;
-	if (buffer[0] == '\0')
-		bytes = read(fd, buffer, BUFFER_SIZE);
-	else
-		bytes = ft_strlen(buffer);
-	str_len = ft_strlen(*str);
-	while (bytes > 0)
-	{
-		buffer[bytes] = '\0';
-		eof = (buffer[bytes - 1] != '\0');
-		temp_str = (char *) malloc(bytes + str_len + eof);
-		if (temp_str == NULL)
-			return (0);
-		ft_strlcpy(temp_str, *str, bytes + str_len + eof);
-		free(*str);
-		*str = temp_str;
-		ft_strlcat(*str, buffer, bytes + str_len + eof);
-		str_len += bytes;
-		if (ft_strchr_index(*str, '\n') != -1)
-		{
-			if (!contains_new_line(buffer, str, ft_strchr_index(*str, '\n')))
-				return (0);
-			break ;
-		}
-		bytes = read(fd, buffer, BUFFER_SIZE);
-	}
-	if (bytes == 0 && (!eof || !contains_null_character(buffer, str)))
-		return (0);
-	return (bytes >= 0);
-}*/
 
 static int	read_line(int fd, char *buffer, char **str)
 {

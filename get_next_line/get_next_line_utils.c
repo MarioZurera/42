@@ -58,7 +58,10 @@ char	*ft_strjoin(const char *s1, const char *s2, unsigned int extra_size)
 	length = ft_strlen(s1) + ft_strlen(s2) + extra_size;
 	str = (char *) malloc(sizeof(char) * length);
 	if (str == NULL)
+	{
+		free((char *) s1);
 		return (NULL);
+	}
 	ft_strlcpy(str, s1, length);
 	free((char *) s1);
 	dest_len = ft_strlen(str);
