@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:36:00 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/24 20:05:29 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:00:59 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,36 +48,26 @@ int	ft_strlcpy(char *dest, const char *src, unsigned int size)
 	return (src_len);
 }
 
-int	ft_strlcat(char *dest, const char *src, unsigned int size)
-{
-	unsigned int	dest_len;
-	unsigned int	src_len;
-	unsigned int	cat_len;
-
-	dest_len = ft_strlen(dest);
-	src_len = ft_strlen(src);
-	if (size <= dest_len)
-		return (size + src_len);
-	if (dest_len + src_len < size)
-		cat_len = src_len;
-	else
-		cat_len = size - dest_len - 1;
-	ft_memcpy(dest + dest_len, src, cat_len);
-	dest[dest_len + cat_len] = '\0';
-	return (dest_len + src_len);
-}
-
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(const char *s1, const char *s2, unsigned int extra_size)
 {
 	char			*str;
 	unsigned int	length;
+	unsigned int	dest_len;
+	unsigned int	cat_len;
 
-	length = ft_strlen(s1) + ft_strlen(s2) + 1;
+	length = ft_strlen(s1) + ft_strlen(s2) + extra_size;
 	str = (char *) malloc(sizeof(char) * length);
 	if (str == NULL)
 		return (NULL);
 	ft_strlcpy(str, s1, length);
-	ft_strlcat(str, s2, length);
+	free((char *) s1);
+	dest_len = ft_strlen(str);
+	if (dest_len + ft_strlen(s2) < length)
+		cat_len = ft_strlen(s2);
+	else
+		cat_len = length - dest_len - 1;
+	ft_memcpy(str + dest_len, s2, cat_len);
+	str[dest_len + cat_len] = '\0';
 	return (str);
 }
 

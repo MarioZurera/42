@@ -6,82 +6,13 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 13:18:53 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/10/24 19:47:29 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:29:32 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static int	contains_new_line(char *buffer, char **str)
-{
-	int		pos;
-	int		new_len;
-	char	*temp;
-
-	pos = ft_strchr_index(*str, '\n');
-	new_len = ft_strlen(*str) - pos;
-	if (pos != -1)
-	{
-		temp = ft_substr(*str, pos, new_len);
-		ft_strlcpy(buffer, temp, new_len);
-		free(temp);
-		temp = ft_substr(*str, 0, pos);
-		if (temp == NULL)
-			return (0);
-		free(*str);
-		*str = temp;
-	}
-	return (pos != 1);
-}
-
-static int	contains_null_character(char *buffer, char **str)
-{
-	int		pos;
-	char	*temp;
-
-	pos = ft_strlen(buffer);
-	if (pos < BUFFER_SIZE)
-	{
-		buffer[0] = '\0';
-		temp = ft_substr(*str, 0, pos);
-		if (temp == NULL)
-			return (0);
-		free(*str);
-		*str = temp;
-	}
-	return (pos < BUFFER_SIZE);
-}
-
-static int	read_line(int fd, char *buffer, char **str)
-{
-	int		bytes;
-	char	*temp_str;
-
-	if (buffer[0] == '\0')
-		bytes = read(fd, &buffer, BUFFER_SIZE);
-	else
-		bytes = ft_strlen(buffer);
-	while (bytes > 0)
-	{
-		temp_str = (char *) malloc(bytes + ft_strlen(*str) + 1);
-		if (temp_str == NULL)
-			return (0);
-		free(*str);
-		*str = temp_str;
-		ft_strlcpy(str, s1, length);
-		ft_strlcat(str, s2, length);
-		
-		if (temp_str == NULL)
-			return (0);
-		*str = temp_str;
-		if (contains_new_line(buffer, str))
-			break ;
-		if (contains_null_character(buffer, str))
-			break ;
-		bytes = read(fd, &buffer, BUFFER_SIZE);
-	}
-	return (bytes > 0);
-}
+#include <stdio.h>
+#include <fcntl.h>
 
 unsigned int	ft_strlen(const char *str)
 {
@@ -93,12 +24,112 @@ unsigned int	ft_strlen(const char *str)
 	return (length);
 }
 
+static int	contains_new_line(char *buffer, char **str, int pos)
+{
+	int		new_len;
+	char	*temp;
+
+	new_len = ft_strlen(*str) - pos;
+	if (pos != -1)
+	{
+		ft_strlcpy(buffer, *str + pos + 1, new_len);
+		temp = ft_substr(*str, 0, pos + 1);
+		if (temp == NULL)
+			return (0);
+		free(*str);
+		*str = temp;
+	}
+	(*str)[pos] = '\n';
+	return (pos != -1);
+}
+
+static int	contains_null_character(char *buffer, char **str)
+{
+	int		pos;
+	char	*temp;
+
+	pos = ft_strlen(*str);
+	temp = ft_substr(*str, 0, pos);
+	if (temp == NULL)
+		return (0);
+	buffer[0] = '\0';
+	free(*str);
+	*str = temp;
+	return (1);
+}
+
+/*static int	read_line(int fd, char *buffer, char **str)
+{
+	int		bytes;
+	int		str_len;
+	char	*temp_str;
+	int		eof;
+
+	eof = 0;
+	if (buffer[0] == '\0')
+		bytes = read(fd, buffer, BUFFER_SIZE);
+	else
+		bytes = ft_strlen(buffer);
+	str_len = ft_strlen(*str);
+	while (bytes > 0)
+	{
+		buffer[bytes] = '\0';
+		eof = (buffer[bytes - 1] != '\0');
+		temp_str = (char *) malloc(bytes + str_len + eof);
+		if (temp_str == NULL)
+			return (0);
+		ft_strlcpy(temp_str, *str, bytes + str_len + eof);
+		free(*str);
+		*str = temp_str;
+		ft_strlcat(*str, buffer, bytes + str_len + eof);
+		str_len += bytes;
+		if (ft_strchr_index(*str, '\n') != -1)
+		{
+			if (!contains_new_line(buffer, str, ft_strchr_index(*str, '\n')))
+				return (0);
+			break ;
+		}
+		bytes = read(fd, buffer, BUFFER_SIZE);
+	}
+	if (bytes == 0 && (!eof || !contains_null_character(buffer, str)))
+		return (0);
+	return (bytes >= 0);
+}*/
+
+static int	read_line(int fd, char *buffer, char **str)
+{
+	int		bytes;
+	int		eof;
+
+	eof = 0;
+	if (buffer[0] == '\0')
+		bytes = read(fd, buffer, BUFFER_SIZE);
+	else
+		bytes = ft_strlen(buffer);
+	while (bytes > 0)
+	{
+		buffer[bytes] = '\0';
+		eof = (buffer[bytes - 1] != '\0');
+		*str = ft_strjoin(*str, buffer, eof);
+		if (*str == NULL)
+			return (0);
+		if (ft_strchr_index(*str, '\n') != -1)
+		{
+			if (!contains_new_line(buffer, str, ft_strchr_index(*str, '\n')))
+				return (0);
+			break ;
+		}
+		bytes = read(fd, buffer, BUFFER_SIZE);
+	}
+	return (bytes > 0 || (bytes == 0 && eof
+			&& contains_null_character(buffer, str)));
+}
+
 char	*get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE + 1];
 	char		*str;
 	int			control;
-	/*char		*temp_str;*/
 
 	str = (char *) malloc(1 * sizeof(char));
 	if (str == NULL)
@@ -111,10 +142,5 @@ char	*get_next_line(int fd)
 		free(str);
 		return (NULL);
 	}
-	/*temp_str = ft_strjoin(str, "\n");
-	free(str);
-	if (temp_str == NULL)
-		return (0);
-	str = temp_str;*/
 	return (str);
 }

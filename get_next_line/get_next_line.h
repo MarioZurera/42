@@ -21,8 +21,8 @@
 # include <stdlib.h>
 
 int				ft_strlcpy(char *dest, const char *src, unsigned int size);
-int				ft_strlcat(char *dest, const char *src, unsigned int size);
-char			*ft_strjoin(const char *s1, const char *s2);
+char			*ft_strjoin(const char *s1, const char *s2,
+					unsigned int extra_size);
 int				ft_strchr_index(char *str, int c);
 char			*ft_substr(const char *s, unsigned int start, unsigned int len);
 unsigned int	ft_strlen(const char *str);
