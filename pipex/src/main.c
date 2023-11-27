@@ -6,28 +6,11 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:00 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/11/20 14:43:15 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:39:23 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-static void	ft_deep_free(void **mem, unsigned int depth)
-{
-	int	i;
-
-	i = 0;
-	if (mem == NULL)
-		depth = 0;
-	while (depth > 1 && mem[i] != NULL)
-	{
-		if (depth > 2)
-			ft_deep_free((void **) mem[i], depth - 1);
-		free(mem[i++]);
-	}
-	if (depth > 0)
-		free(mem);
-}
 
 static char	**ft_get_paths(char **envp)
 {

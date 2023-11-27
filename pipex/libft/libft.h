@@ -556,6 +556,15 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
  */
 int				ft_printf(const char *format, ...);
 
+/**
+ * @brief Free a multidimensional array.
+ * @param mem The pointer to array.
+ * @param depth The dimension of the array.
+ * @note Using a depth greater than the real dimension
+ * might cause a segmentation fault.
+*/
+void			ft_deep_free(void **mem, unsigned int depth);
+
 /* Utility ft_printf functions. */
 
 int				eval_conversion(const char *format, int *pos, va_list arg);
