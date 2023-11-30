@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/11/20 11:36:54 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/11/30 21:12:26 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,16 @@ int				ft_strlcat(char *dest, const char *src, size_t size);
  * if the char is not found.
 */
 char			*ft_strchr(const char *s, int c);
+
+/**
+ * @brief Locate the first occurrence of the character c
+ * in the string pointed by and return his index.
+ * @param s The pointer to the string.
+ * @param c The char to be found.
+ * @return The index to the character found or -1
+ * if the char is not found.
+*/
+size_t			ft_strchr_i(const char *s, int c);
 
 /**
  * @brief Locate the last occurrence of the character c 
