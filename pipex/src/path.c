@@ -54,7 +54,7 @@ static char	*get_cmd_fullname(char *cmd_name, char **path)
 	return (cmd_path);
 }
 
-char	**ft_cmd_paths(int argc, char **cmd_names, char **path)
+static char	**ft_cmd_paths(int argc, char **cmd_names, char **path)
 {
 	int		i;
 	char	**cmd_paths;
@@ -81,4 +81,10 @@ char	**ft_cmd_paths(int argc, char **cmd_names, char **path)
 	ft_free_strs(cmd_names, 2);
 	ft_free_strs(path, 2);
 	return (cmd_paths);
+}
+
+char	**ft_paths(int argc, char **argv, char **envp)
+{
+	return (ft_cmd_paths(argc, ft_get_names(argc, argcv),
+				ft_get_paths(envp));
 }
