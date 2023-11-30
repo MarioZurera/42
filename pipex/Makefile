@@ -9,7 +9,7 @@ LIBFT		= libft.a
 
 NAME		= pipex
 CAP_NAME	= $(shell echo $(NAME) | awk '{print toupper(substr($$0, 1, 1)) substr($$0, 2)}')
-SRC_NAME	= main.c
+SRC_NAME	= main.c path.c
 OBJ_NAME	= $(notdir $(SRC_NAME:.c=.o))
 SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_NAME))
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_NAME))
@@ -37,7 +37,7 @@ $(OBJ_DIR):
 $(NAME): $(OBJS)
 	@echo "$(C_BLUE)Builing $(NAME)...$(C_DEF)"
 	@make all -s -C ./$(LIB_DIR)/
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIB_DIR) -l:$(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L./$(LIB_DIR) ./$(LIB_DIR)/$(LIBFT) -o $(NAME)
 	@echo "$(C_GREEN)$(CAP_NAME) built and ready to go!$(C_DEF)"
 
 clean:
