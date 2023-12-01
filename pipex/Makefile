@@ -9,7 +9,7 @@ LIBFT		= libft.a
 
 NAME		= pipex
 CAP_NAME	= $(shell echo $(NAME) | awk '{print toupper(substr($$0, 1, 1)) substr($$0, 2)}')
-SRC_NAME	= pipex.c path.c
+SRC_NAME	= pipex.c path.c args.c
 OBJ_NAME	= $(notdir $(SRC_NAME:.c=.o))
 SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_NAME))
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_NAME))

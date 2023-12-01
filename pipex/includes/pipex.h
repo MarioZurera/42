@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/11/30 20:19:29 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:51:50 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,20 @@ typedef	struct s_pipex {
 
 /**
  * @brief Get the paths to the commands.
- * @param argc Number of arguments recieved by the program.
- * @param argv Name of the arguments, recieved by the program.
+ * @param argc Number of arguments recieved by the program. (Excluded name)
+ * @param argv Name of the arguments, recieved by the program. (Excluded name)
  * @param envp Enviroment variables in this terminal session.
+ * @return The absolute paths to the binaries of the commands.
 */
 char	**ft_paths(int argc, char **argv, char **envp);
+
+/**
+ * @brief Get the arguments of the commands.
+ * @param argc Number of arguments recieved by the program. (Excluded name)
+ * @param argv Name of the arguments recieved by the program. (Excluded name)
+ * @return An array with the arguments of the commands as a matrix per command.
+*/
+char	***ft_args(int argc, char **argv);
 
 int		main(int argc, char **argv, char **envp);
 
