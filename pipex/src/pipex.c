@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:00 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/11/30 20:20:19 by mzurera-         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:30:50 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,22 @@ char	***ft_cmd_args(int argc, char **argv)
 	return (cmd_args);
 }
 
+void	check_pipex(t_pipex **pipex)
+{
+	if (
+		pipex->in_fd == -1
+		|| pipex->out_fd == -1
+		|| pipex->cmd_paths == NULL
+		|| pipex->cmd_args == NULL
+	)
+	{
+		ft_deep_free((void **) pipex->cmd_paths, 2);
+		ft_deep_free((void **) pipex->cmd_args, 3);
+		free(pipex);
+		pipex = NULL;
+	}
+}
+
 t_pipex	*ft_init_pipex(int argc, char **argv, char **envp)
 {
 	t_pipex	*pipex;
@@ -46,17 +62,10 @@ t_pipex	*ft_init_pipex(int argc, char **argv, char **envp)
 	pipex->out_fd = -1;
 	pipex->cmd_paths = ft_paths(argc, argv, envp);
 	pipex->cmd_args = ft_cmd_args(argc, argv);
-	if (pipex->in_fd == -1 || pipex->out_fd == -1
-			|| pipex->cmd_paths == NULL || pipex->cmd_args == NULL)
-	{
-		ft_deep_free((void **) pipex->cmd_paths, 2);
-		ft_deep_free((void **) pipex->cmd_args, 3);
-		return (NULL);
-	}	
 	return (pipex);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	if (argc < 3)
 		return (0);

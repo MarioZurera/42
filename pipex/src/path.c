@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/01 17:13:46 by mzurera-          #+#    #+#             */
+/*   Updated: 2023/12/01 17:28:38 by mzurera-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 
 static char	**ft_get_paths(char **envp)
@@ -59,7 +71,7 @@ static char	**ft_cmd_paths(int argc, char **cmd_names, char **path)
 	int		i;
 	char	**cmd_paths;
 
-	cmd_paths = (char **) ft_calloc(argc - 1, sizeof(char*));
+	cmd_paths = (char **) ft_calloc(argc - 1, sizeof(char *));
 	if (cmd_names == NULL || path == NULL || cmd_paths == NULL)
 	{
 		ft_deep_free((void **) cmd_names, 2);
@@ -86,5 +98,5 @@ static char	**ft_cmd_paths(int argc, char **cmd_names, char **path)
 char	**ft_paths(int argc, char **argv, char **envp)
 {
 	return (ft_cmd_paths(argc, ft_get_names(argc, argv),
-				ft_get_paths(envp)));
+			ft_get_paths(envp)));
 }
