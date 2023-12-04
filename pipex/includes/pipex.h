@@ -19,7 +19,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-typedef	struct s_pipex {
+typedef struct s_pipex
+{
 	int		in_fd;
 	int		out_fd;
 	char	**cmd_paths;

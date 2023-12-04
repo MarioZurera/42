@@ -19,5 +19,5 @@ size_t	ft_strchr_i(const char *s, int c)
 	res = ft_strchr(s, c);
 	if (res == NULL)
 		return (-1);
-	return ((size_t) ((size_t) ft_strchr(s, c) - (size_t) s));
+	return ((size_t)((size_t) ft_strchr(s, c) - (size_t) s));
 }

@@ -22,7 +22,7 @@ typedef enum e_bool
 {
 	false,
 	true
-} t_bool;
+}	t_bool;
 
 typedef struct s_list
 {
@@ -32,9 +32,9 @@ typedef struct s_list
 
 typedef struct s_conversion
 {
-	char          *flags;
-	unsigned int  length;
-	int           precision;
+	char			*flags;
+	unsigned int	length;
+	int				precision;
 }	t_conversion;
 
 /**
@@ -588,7 +588,8 @@ int				eval_hexup(va_list arg, t_conversion *data);
 int				eval_percentage(t_conversion *data);
 
 int				print_hex(unsigned long int n, char letter);
-void			get_lengths(char *flags, va_list arg, unsigned int *length, int *prec);
+void			get_lengths(char *flags, va_list arg,
+					unsigned int *length, int *prec);
 int				ft_conversion(const char *format, int *pos, va_list arg,
 					t_conversion *data);
 int				padding(int length, char c);

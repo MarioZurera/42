@@ -15,7 +15,6 @@
 static unsigned int	ft_count_args(char *args)
 {
 	unsigned int	count;
-	char			c;
 	int				new_argument;
 
 	count = 0;
@@ -31,9 +30,7 @@ static unsigned int	ft_count_args(char *args)
 			args++;
 		if (*args == 34 || *args == 39)
 		{
-			c = *args;
-			args++;
-			args += ft_strchr_i(args, c);
+			args += ft_strchr_i(args + 1, *args) + 1;
 			new_argument = 1;
 		}
 		if (*args && *args != ' ')
