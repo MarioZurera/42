@@ -38,17 +38,18 @@ t_pipex	*ft_init_pipex(int argc, char **argv, char **envp)
 	pipex->in_fd = -1;
 	pipex->out_fd = -1;
 	pipex->cmd_paths = ft_paths(argc, argv, envp);
-	pipex->cmd_args = ft_args(argc, argv);
-	check_pipex(&pipex);
+	// pipex->cmd_args = ft_args(argc, argv);
+	// check_pipex(&pipex);
 	return (pipex);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_pipex	*pipex;
+
 	if (argc < 3)
 		return (0);
-	argv++;
-	argc--;
-	(void) envp;
+	pipex = ft_init_pipex(argc, argv, envp);
+	printf("%p\n", pipex);
 	return (0);
 }
