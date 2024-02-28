@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_pipex
 {
@@ -28,9 +29,15 @@ typedef struct s_pipex
 }	t_pipex;
 
 /**
+ * @brief Print n strings.
+ * @param n_params Number of strings to be printed.
+*/
+void	print_error(unsigned int n_params, ...);
+
+/**
  * @brief Get the paths to the commands.
- * @param argc Number of arguments recieved by the program. (Excluded name)
- * @param argv Name of the arguments, recieved by the program. (Excluded name)
+ * @param argc Number of arguments recieved by the program.
+ * @param argv Name of the arguments, recieved by the program.
  * @param envp Enviroment variables in this terminal session.
  * @return The absolute paths to the binaries of the commands.
 */
@@ -38,8 +45,8 @@ char	**ft_paths(int argc, char **argv, char **envp);
 
 /**
  * @brief Get the arguments of the commands.
- * @param argc Number of arguments recieved by the program. (Excluded name)
- * @param argv Name of the arguments recieved by the program. (Excluded name)
+ * @param argc Number of arguments recieved by the program.
+ * @param argv Name of the arguments recieved by the program.
  * @return An array with the arguments of the commands as a matrix per command.
 */
 char	***ft_args(int argc, char **argv);
