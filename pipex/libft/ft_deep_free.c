@@ -12,19 +12,23 @@
 
 #include "libft.h"
 
-void	ft_deep_free(void **mem, unsigned int depth)
+void	ft_deep_free(void **ptr, unsigned int depth)
 {
-	int	i;
+	int		i;
+	void	**mem;
 
 	i = 0;
+	mem = *ptr;
 	if (mem == NULL)
 		depth = 0;
 	while (depth > 1 && mem[i] != NULL)
 	{
 		if (depth > 2)
 			ft_deep_free((void **) mem[i], depth - 1);
-		free(mem[i++]);
+		free(mem[i]);
+		i++;
 	}
 	if (depth > 0)
 		free(mem);
+	*ptr = NULL;
 }
