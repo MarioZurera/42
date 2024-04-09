@@ -50,7 +50,7 @@ static int	push_element(char **cmd_arg, char *args, int start, int len)
 		pos++;
 	cmd_arg[pos] = ft_substr(args, start, len);
 	if (cmd_arg[pos] == NULL)
-		ft_deep_free((void **) cmd_arg, 2);
+		ft_deep_free((void **) &cmd_arg, 2);
 	return (cmd_arg[pos] != NULL);
 }
 
@@ -100,20 +100,20 @@ char	***ft_args(int argc, char **argv)
 	int		i;
 	char	***cmd_args;
 
-	cmd_args = (char ***) ft_calloc(argc - 1, sizeof(char **));
+	cmd_args = (char ***) ft_calloc(argc - 3, sizeof(char **));
 	if (cmd_args == NULL)
 		return (NULL);
-	i = 1;
-	while (argv[i] != NULL && argv[i + 1] != NULL)
+	i = 0;
+	while (argv[i + 1] != NULL && argv[i + 2] != NULL)
 	{
-		cmd_args[i - 1] = ft_parse_args(argv[i]);
-		if (cmd_args[i - 1] == NULL)
+		cmd_args[i] = ft_parse_args(argv[i + 2]);
+		if (cmd_args[i] == NULL)
 		{
-			ft_deep_free((void **) cmd_args, 3);
+			ft_deep_free((void **) &cmd_args, 2);
 			return (NULL);
 		}
 		i++;
 	}
-	cmd_args[i - 1] = NULL;
+	cmd_args[i] = NULL;
 	return (cmd_args);
 }

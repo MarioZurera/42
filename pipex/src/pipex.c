@@ -21,8 +21,8 @@ void	check_pipex(t_pipex **pipex)
 		|| (*pipex)->cmd_args == NULL
 	)
 	{
-		ft_deep_free((void **)(*pipex)->cmd_paths, 2);
-		ft_deep_free((void **)(*pipex)->cmd_args, 3);
+		ft_deep_free((void **) &(*pipex)->cmd_paths, 2);
+		ft_deep_free((void **) &(*pipex)->cmd_args, 2);
 		free(*pipex);
 		*pipex = NULL;
 	}
@@ -38,8 +38,10 @@ t_pipex	*ft_init_pipex(int argc, char **argv, char **envp)
 	pipex->in_fd = -1;
 	pipex->out_fd = -1;
 	pipex->cmd_paths = ft_paths(argc, argv, envp);
-	// pipex->cmd_args = ft_args(argc, argv);
-	// check_pipex(&pipex);
+	pipex->cmd_args = ft_args(argc, argv);
+	for (int k = 0; pipex->cmd_args[k]; k++)
+		ft_printf("%s\n", pipex->cmd_args[k]);
+	check_pipex(&pipex);
 	return (pipex);
 }
 
@@ -50,6 +52,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 3)
 		return (0);
 	pipex = ft_init_pipex(argc, argv, envp);
-	printf("%p\n", pipex);
+	ft_printf("%p\n", pipex);
 	return (0);
 }
