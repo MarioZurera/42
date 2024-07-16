@@ -1,5 +1,5 @@
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 
 SRC_DIR		= src
 OBJ_DIR		= objects
@@ -9,7 +9,7 @@ LIBFT		= libft.a
 
 NAME		= pipex
 CAP_NAME	= $(shell echo $(NAME) | awk '{print toupper(substr($$0, 1, 1)) substr($$0, 2)}')
-SRC_NAME	= pipex.c path.c args.c error.c
+SRC_NAME	= pipex.c parser.c fullname.c args.c error.c
 OBJ_NAME	= $(notdir $(SRC_NAME:.c=.o))
 SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_NAME))
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_NAME))
@@ -47,6 +47,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(LIBFT)
 	@echo "$(C_RED)Cleaned $(NAME) program!$(C_DEF)"
 
 re: fclean all

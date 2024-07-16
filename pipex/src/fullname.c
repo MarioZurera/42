@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   fullname.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:13:46 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/12/01 17:28:38 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:32:03 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
+/**
+ * @brief Get an array with the possible paths.
+ * @param envp The environment variables of the process.
+ * @return An array with the possible paths
+*/
 static char	**ft_get_paths(char **envp)
 {
 	int		i;
@@ -25,10 +29,10 @@ static char	**ft_get_paths(char **envp)
 	while (paths[++i])
 	{
 		temp = paths[i];
-		if (paths[i][ft_strlen(paths[i]) - 1] != '/')
-			paths[i] = ft_strjoin(paths[i], "/");
+		if (paths && paths[i] && paths[i][ft_strlen(paths[i]) - 1] != '/')
+			paths[i] = ft_strjoin(temp, "/");
 		free(temp);
-		if (paths[i] == NULL)
+		if (paths && paths[i] == NULL)
 			ft_deep_free((void **) &paths, 2);
 	}
 	return (paths);
@@ -38,11 +42,12 @@ static char	**ft_get_paths(char **envp)
  * @brief Get the name of the commands.
  * @param argc Amount of parameters pass to the program.
  * @param argv The array of parameters pass to the program.
+ * @param NUM_COMMANDS Number of commands to be executed.
  * @return An array of strings with the name of the commands.
- * @note Take into consideration an argv with the program name,
- * and extra in/out files.
+ * @note Take into consideration that the argv contains the program name,
+ * in file and out file.
 */
-static char	**ft_get_names(int argc, char **argv)
+static char	**ft_get_names(char **argv, int NUM_COMMANDS)
 {
 	int		i;
 	int		j;
@@ -50,38 +55,39 @@ static char	**ft_get_names(int argc, char **argv)
 
 	i = 0;
 	j = 0;
-	cmd_names = (char **) ft_calloc(argc - 3, sizeof(char *));
-	if (cmd_names == NULL || argv[i] == NULL || argv[i + 1] == NULL)
-		return (NULL);
-	while (argv[i + 1] != NULL && argv[i + 2] != NULL)
+	cmd_names = (char **) malloc(sizeof(char *) * (NUM_COMMANDS + 1));
+	if (cmd_names == NULL || argv[i] == NULL || argv[i + 1] == NULL || argv[i + 2] == NULL)
 	{
+		free(cmd_names);
+		return (NULL);
+	}
+	while (i < NUM_COMMANDS)
+	{
+		j = 0;
 		while (ft_isspace(argv[i + 2][j]))
 			j++;
 		cmd_names[i] = ft_substr(argv[i + 2], j,
 				ft_strchr_i(&argv[i + 2][j], ' '));
 		if (cmd_names[i] == NULL)
-		{
-			ft_deep_free((void **) &cmd_names, 2);
-			return (NULL);
-		}
+			return (ft_deep_free((void **) &cmd_names, 2));
 		i++;
 	}
-	cmd_names[i - 1] = NULL;
+	cmd_names[i] = NULL;
 	return (cmd_names);
 }
 
-static char	*get_cmd_fullname(char *cmd_name, char **path)
+static char	*get_fullname(char *cmd_name, char **paths)
 {
 	int		i;
 	char	*fullname;
 
 	i = 0;
 	fullname = NULL;
-	while (path[i] != NULL && fullname == NULL)
+	while (paths[i] != NULL && fullname == NULL)
 	{
-		fullname = ft_strjoin(path[i], cmd_name);
+		fullname = ft_strjoin(paths[i], cmd_name);
 		if (fullname == NULL)
-			return (NULL);
+			return (cmd_name);
 		if (access(fullname, F_OK) == -1)
 		{
 			free(fullname);
@@ -90,37 +96,36 @@ static char	*get_cmd_fullname(char *cmd_name, char **path)
 		i++;
 	}
 	if (fullname == NULL)
-		fullname = "none";
+		fullname = cmd_name;
 	return (fullname);
 }
 
-static char	**ft_cmd_paths(int argc, char **cmd_names, char **path)
+static char	**ft_cmd_fullname(char **cmd_names, char **paths, int NUM_COMMANDS)
 {
 	int		i;
-	char	**cmd_paths;
+	char	**cmd_fullname;
 
-	cmd_paths = (char **) ft_calloc(argc - 3, sizeof(char *));
-	if (cmd_names == NULL || path == NULL || cmd_paths == NULL)
+	cmd_fullname = (char **) malloc(sizeof(char *) * (NUM_COMMANDS + 1));
+	if (cmd_names == NULL || paths == NULL || cmd_fullname == NULL)
 	{
 		ft_deep_free((void **) &cmd_names, 2);
-		ft_deep_free((void **) &path, 2);
-		return (free(cmd_paths), NULL);
+		ft_deep_free((void **) &paths, 2);
+		free(cmd_fullname);
+		return (NULL);
 	}
 	i = -1;
 	while (cmd_names[++i] != NULL)
 	{
-		cmd_paths[i] = get_cmd_fullname(cmd_names[i], path);
-		if (ft_strncmp(cmd_paths[i], "none", 4) == 0)
-			print_error(3, "pipex: ", cmd_names[i], ": command not found\n");
+		cmd_fullname[i] = get_fullname(cmd_names[i], paths);
 	}
-	cmd_paths[i] = NULL;
+	cmd_fullname[i] = NULL;
 	ft_deep_free((void **) &cmd_names, 2);
-	ft_deep_free((void **) &path, 2);
-	return (cmd_paths);
+	ft_deep_free((void **) &paths, 2);
+	return (cmd_fullname);
 }
 
-char	**ft_paths(int argc, char **argv, char **envp)
+char	**ft_fullname(char **argv, char **envp, int NUM_COMMANDS)
 {
-	return (ft_cmd_paths(argc, ft_get_names(argc, argv),
-			ft_get_paths(envp)));
+	return (ft_cmd_fullname(ft_get_names(argv, NUM_COMMANDS),
+			ft_get_paths(envp), NUM_COMMANDS));
 }

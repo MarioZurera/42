@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/11/30 21:12:26 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:54:29 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -573,7 +573,7 @@ int				ft_printf(const char *format, ...);
  * @note Using a depth greater than the real dimension
  * might cause a segmentation fault.
 */
-void			ft_deep_free(void **mem, unsigned int depth);
+void			*ft_deep_free(void **mem, unsigned int depth);
 
 /* Utility ft_printf functions. */
 

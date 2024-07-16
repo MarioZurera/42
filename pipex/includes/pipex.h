@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/12/01 19:51:50 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:33:48 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+typedef struct s_token
+{
+	char			*fullname;
+	char			**args;
+}	t_token;
+
 typedef struct s_pipex
 {
 	int		in_fd;
 	int		out_fd;
-	char	**cmd_paths;
-	char	***cmd_args;
+	t_token	**tokens;
 }	t_pipex;
 
 /**
@@ -35,21 +40,36 @@ typedef struct s_pipex
 void	print_error(unsigned int n_params, ...);
 
 /**
- * @brief Get the paths to the commands.
- * @param argc Number of arguments recieved by the program.
- * @param argv Name of the arguments, recieved by the program.
- * @param envp Enviroment variables in this terminal session.
+ * @brief Get the fullname of the commands.
+ * @param argv Name of the arguments, received by the program.
+ * @param envp Environment variables in this terminal session.
+ * @param NUM_COMMANDS Number of commands to be executed.
  * @return The absolute paths to the binaries of the commands.
 */
-char	**ft_paths(int argc, char **argv, char **envp);
+char	**ft_fullname(char **argv, char **envp, int NUM_COMMANDS);
 
 /**
  * @brief Get the arguments of the commands.
- * @param argc Number of arguments recieved by the program.
- * @param argv Name of the arguments recieved by the program.
+ * @param argv Name of the arguments received by the program.
+ * @param NUM_COMMANDS Number of commands to be executed.
  * @return An array with the arguments of the commands as a matrix per command.
 */
-char	***ft_args(int argc, char **argv);
+char	***ft_args(char **argv, int NUM_COMMANDS);
+
+/**
+ * @brief Initialize the pipex structure.
+ * @param argv Name of the arguments received by the program.
+ * @param envp Environment variables in this terminal session.
+ * @param NUM_COMMANDS Number of commands to be executed.
+ * @return A pointer to the pipex structure.
+*/
+t_pipex	*ft_init_pipex(char **argv, char **envp, int NUM_COMMANDS);
+
+/**
+ * @brief Free the pipex structure.
+ * @param pipex The pipex structure to be freed.
+*/
+void	free_pipex(t_pipex **pipex);
 
 int		main(int argc, char **argv, char **envp);
 

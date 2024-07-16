@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:38:19 by mzurera-          #+#    #+#             */
-/*   Updated: 2023/12/01 20:04:44 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:50:25 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "pipex.h"
 
 static unsigned int	ft_count_args(char *args)
 {
 	unsigned int	count;
 	int				new_argument;
+	char			*temp;
 
+	temp = ft_strtrim(args, " ");
 	count = 0;
-	new_argument = 0;
+	new_argument = 1;
 	while (*args)
 	{
 		if (new_argument)
@@ -26,18 +28,18 @@ static unsigned int	ft_count_args(char *args)
 			count++;
 			new_argument = 0;
 		}
+		if (*args == ' ')
+			new_argument = 1;
 		while (*args == ' ')
 			args++;
-		if (*args == 34 || *args == 39)
-		{
+		if (*args == '\'' || *args == '"')
 			args += ft_strchr_i(args + 1, *args) + 1;
-			new_argument = 1;
-		}
 		if (*args && *args != ' ')
 			args++;
 	}
 	if (new_argument)
 		count++;
+	free(temp);
 	return (count);
 }
 
@@ -59,7 +61,7 @@ static int	pass_quotes(char *args, int i)
 	int		res;
 
 	res = 0;
-	if (args[i] == 34 || args[i] == 39)
+	if (args[i] == '\'' || args[i] == '"')
 		res = ft_strchr_i(&args[i + 1], args[i]);
 	if (res < 0)
 		res = 0;
@@ -73,7 +75,8 @@ static char	**ft_parse_args(char *args)
 	unsigned int	len;
 	unsigned int	temp;
 
-	cmd_arg = ft_calloc(ft_count_args(args), sizeof(char *));
+	printf("%d\n", ft_count_args(args));
+	cmd_arg = ft_calloc(ft_count_args(args) + 1, sizeof(char *));
 	if (cmd_arg == NULL)
 		return (NULL);
 	i = 0;
@@ -95,23 +98,23 @@ static char	**ft_parse_args(char *args)
 	return (cmd_arg);
 }
 
-char	***ft_args(int argc, char **argv)
+char	***ft_args(char **argv, int NUM_COMMANDS)
 {
 	int		i;
 	char	***cmd_args;
 
-	cmd_args = (char ***) ft_calloc(argc - 3, sizeof(char **));
-	if (cmd_args == NULL)
-		return (NULL);
 	i = 0;
-	while (argv[i + 1] != NULL && argv[i + 2] != NULL)
+	cmd_args = (char ***) malloc(sizeof(char **) * (NUM_COMMANDS + 1));
+	if (cmd_args == NULL || argv[i] == NULL || argv[i + 1] == NULL || argv[i + 2] == NULL)
+	{
+		free(cmd_args);
+		return (NULL);
+	}
+	while (i < NUM_COMMANDS)
 	{
 		cmd_args[i] = ft_parse_args(argv[i + 2]);
 		if (cmd_args[i] == NULL)
-		{
-			ft_deep_free((void **) &cmd_args, 2);
-			return (NULL);
-		}
+			return (ft_deep_free((void **) &cmd_args, 3));
 		i++;
 	}
 	cmd_args[i] = NULL;
