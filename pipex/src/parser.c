@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:17:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 14:57:53 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:43:56 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_pipex(t_pipex **pipex)
 		}
 		free((*pipex)->tokens);
 	}
+	close((*pipex)->in_fd);
+	close((*pipex)->out_fd);
 	free(*pipex);
 	*pipex = NULL;
 }
@@ -69,8 +71,13 @@ t_pipex	*ft_init_pipex(char **argv, char **envp, int NUM_COMMANDS)
 		free_pipex(&pipex);
 		return (NULL);
 	}
-	pipex->in_fd = -1;
-	pipex->out_fd = -1;
+	pipex->in_fd = open(argv[0], O_RDONLY);
+	pipex->out_fd = open(argv[NUM_COMMANDS + 2], O_WRONLY);
+	if (pipex->in_fd < 0 || pipex->out_fd < 0)
+	{
+		free_pipex(&pipex);
+		return (NULL);
+	}
 	ft_init_tokens(&pipex,
 		ft_fullname(argv, envp, NUM_COMMANDS),
 		ft_args(argv, NUM_COMMANDS)
