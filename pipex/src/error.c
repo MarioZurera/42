@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzurera- <mzurera-@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:34:44 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/16 16:35:15 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:12:10 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_error(unsigned int n_params, ...)
 		buffer = ft_strjoin(buffer, va_arg(args, char *));
 		free(temp);
 	}
-	ft_putstr_fd(buffer, 1);
+	ft_putstr_fd(buffer, STDERR_FILENO);
 	free(buffer);
 	va_end(args);
 }

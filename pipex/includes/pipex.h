@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 15:41:10 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:05:26 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdarg.h>
+#include <sys/wait.h>
 
 typedef struct s_token
 {
-	char			*fullname;
-	char			**args;
+	char	*fullname;
+	char	**args;
+	int		number;
 }	t_token;
 
 typedef struct s_pipex
 {
 	int		in_fd;
 	int		out_fd;
+	char	**envp;
+	int		*pids;
 	t_token	**tokens;
 }	t_pipex;
 
@@ -70,6 +74,13 @@ t_pipex	*ft_init_pipex(char **argv, char **envp, int NUM_COMMANDS);
  * @param pipex The pipex structure to be freed.
 */
 void	free_pipex(t_pipex **pipex);
+
+/**
+ * @brief Run the commands.
+ * @param pipex The pipex structure with the commands to be executed.
+ * @return The status of the execution.
+*/
+int	run_commands(t_pipex *pipex);
 
 int		main(int argc, char **argv, char **envp);
 
