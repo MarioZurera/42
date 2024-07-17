@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 18:05:26 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:34:59 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdarg.h>
-#include <sys/wait.h>
+# include <sys/wait.h>
 
 typedef struct s_token
 {
@@ -42,6 +42,30 @@ typedef struct s_pipex
  * @param n_params Number of strings to be printed.
 */
 void	print_error(unsigned int n_params, ...);
+
+/**
+ * @brief Print an error message when a file is not found.
+ * @param name Name of the file that was not found.
+*/
+void	print_error_file(char *name);
+
+/**
+ * @brief Print an error message when a command is not found.
+ * @param name Name of the command.
+*/
+void	print_error_command(char *name);
+
+/**
+ * @brief Print an error message when a file descriptor cannot be duplicated.
+ * @note This function is called when a dup or dup2 function fails.
+*/
+void	print_error_dup(void);
+
+/**
+ * @brief Print an error message when a pipe cannot be created.
+ * @note This function is called when a pipe function fails.
+*/
+void	print_error_pipe(void);
 
 /**
  * @brief Get the fullname of the commands.
@@ -80,7 +104,7 @@ void	free_pipex(t_pipex **pipex);
  * @param pipex The pipex structure with the commands to be executed.
  * @return The status of the execution.
 */
-int	run_commands(t_pipex *pipex);
+int		run_commands(t_pipex *pipex);
 
 int		main(int argc, char **argv, char **envp);
 

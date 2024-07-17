@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:00 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 18:33:58 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:24:38 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex			*pipex;
 	unsigned int	num_commands;
-	int	status;
+	int				status;
 
 	if (argc < 3)
 		return (0);
