@@ -57,11 +57,9 @@ bonus: $(BONOBJS)
 	cp $(LIB_DIR)/$(LIBFT) $(LIBFT)
 	gcc $(CFLAGS) -L. -l:$(LIBFT) $(BONUS_OBJS) -o $(NAME)
 
-test: bonus
-	@$(CC) -o test.o -I $(INCS) -c test.c
-	@$(CC) -o test test.o -L. -l:$(LIBFT)
-	@./test
+test: $(NAME)
+	@./pipex in "echo '123'" out
 	@echo "\n"
-	@$(RM) test test.o
+	@$(RM) ./pipex
 
 .PHONY: all bonus clean fclean re .c.o
