@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:38:19 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/16 21:50:25 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:23:17 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,14 @@
 static unsigned int	ft_count_args(char *args)
 {
 	unsigned int	count;
-	int				new_argument;
 	char			*temp;
 
 	temp = ft_strtrim(args, " ");
 	count = 0;
-	new_argument = 1;
 	while (*args)
 	{
-		if (new_argument)
-		{
-			count++;
-			new_argument = 0;
-		}
 		if (*args == ' ')
-			new_argument = 1;
+			count++;
 		while (*args == ' ')
 			args++;
 		if (*args == '\'' || *args == '"')
@@ -37,7 +30,7 @@ static unsigned int	ft_count_args(char *args)
 		if (*args && *args != ' ')
 			args++;
 	}
-	if (new_argument)
+	if (*args != ' ')
 		count++;
 	free(temp);
 	return (count);
@@ -62,7 +55,7 @@ static int	pass_quotes(char *args, int i)
 
 	res = 0;
 	if (args[i] == '\'' || args[i] == '"')
-		res = ft_strchr_i(&args[i + 1], args[i]);
+		res = ft_strchr_i(&args[i] + 1, args[i]) + 1;
 	if (res < 0)
 		res = 0;
 	return (res);
@@ -75,7 +68,6 @@ static char	**ft_parse_args(char *args)
 	unsigned int	len;
 	unsigned int	temp;
 
-	printf("%d\n", ft_count_args(args));
 	cmd_arg = ft_calloc(ft_count_args(args) + 1, sizeof(char *));
 	if (cmd_arg == NULL)
 		return (NULL);
@@ -104,8 +96,10 @@ char	***ft_args(char **argv, int NUM_COMMANDS)
 	char	***cmd_args;
 
 	i = 0;
+	if (argv[i] == NULL || argv[i + 1] == NULL || argv[i + 2] == NULL)
+		return (NULL);
 	cmd_args = (char ***) malloc(sizeof(char **) * (NUM_COMMANDS + 1));
-	if (cmd_args == NULL || argv[i] == NULL || argv[i + 1] == NULL || argv[i + 2] == NULL)
+	if (cmd_args == NULL)
 	{
 		free(cmd_args);
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:00 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/16 21:43:15 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:54:13 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(int argc, char **argv, char **envp)
 		printf("  Args:\n");
 		for (int j = 0; pipex->tokens[i]->args[j]; j++)
 				printf("    %s\n", pipex->tokens[i]->args[j]);
-		printf("\n");
 	}
 	ft_printf("%p\n", pipex);
+	free_pipex(&pipex);
 	return (0);
 }

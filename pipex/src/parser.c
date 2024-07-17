@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:17:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/16 21:43:04 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:05:46 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	free_pipex(t_pipex **pipex)
 		while ((*pipex)->tokens[i] != NULL)
 		{
 			free((*pipex)->tokens[i]->fullname);
-			ft_deep_free((void **) &(*pipex)->tokens[i]->args, 1);
+			ft_deep_free((void **) &(*pipex)->tokens[i]->args, 2);
+			free((*pipex)->tokens[i]);
+			i++;
 		}
 		free((*pipex)->tokens);
 	}
