@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:46:47 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 18:20:36 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:03:29 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ static void	exec_command(t_pipex *pipex, t_token *token, int pid, int *fd)
 		close(fd[1]);
 		exit(1);
 	}
+	if (access(token->fullname, F_OK) == -1)
+	{
+		pipex->pids[token->number] = -1;
+		return ;
+	}
 	if (pid == 0)
 	{
 		execve(token->fullname, token->args, pipex->envp);
@@ -48,8 +53,14 @@ static int	wait_commands(t_pipex *pipex)
 	int	status;
 
 	i = 0;
+	status = 0;
 	while (pipex->pids[i])
 	{
+		if (pipex->pids[i] == -1)
+		{
+			i++;
+			continue ;
+		}
 		waitpid(pipex->pids[i], &status, 0);
 		if (WIFEXITED(status))
 			WEXITSTATUS(status);

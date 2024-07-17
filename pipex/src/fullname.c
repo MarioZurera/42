@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:13:46 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 14:53:34 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:00:18 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static char	*get_fullname(char *cmd_name, char **paths)
 		i++;
 	}
 	if (fullname == NULL)
-		fullname = cmd_name;
+		fullname = ft_strdup(cmd_name);
 	return (fullname);
 }
 

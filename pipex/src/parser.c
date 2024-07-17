@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:17:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 18:43:20 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:51:24 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_pipex	*ft_init_pipex(char **argv, char **envp, int NUM_COMMANDS)
 		return (NULL);
 	}
 	pipex->in_fd = open(argv[1], O_RDONLY);
-	pipex->out_fd = open(argv[NUM_COMMANDS + 2], O_WRONLY | O_TRUNC);
+	pipex->out_fd = open(argv[NUM_COMMANDS + 2], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (pipex->in_fd < 0 || pipex->out_fd < 0)
 	{
 		free_pipex(&pipex);
