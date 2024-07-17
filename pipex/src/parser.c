@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:17:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 18:31:35 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:43:20 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	free_pipex(t_pipex **pipex)
 {
 	int	i;
 
-	if (pipex != NULL && *pipex != NULL && (*pipex)->tokens != NULL)
+	if (pipex == NULL || *pipex == NULL)
+		return ;
+	if ((*pipex)->tokens != NULL)
 	{
 		i = 0;
 		while ((*pipex)->tokens[i] != NULL)
@@ -28,8 +30,10 @@ void	free_pipex(t_pipex **pipex)
 		}
 		free((*pipex)->tokens);
 	}
-	close((*pipex)->in_fd);
-	close((*pipex)->out_fd);
+	if ((*pipex)->in_fd < 0)
+		close((*pipex)->in_fd);
+	if ((*pipex)->out_fd < 0)
+		close((*pipex)->out_fd);
 	free((*pipex)->pids);
 	free(*pipex);
 	*pipex = NULL;
@@ -69,7 +73,7 @@ t_pipex	*ft_init_pipex(char **argv, char **envp, int NUM_COMMANDS)
 		return (NULL);
 	pipex->pids = ft_calloc(NUM_COMMANDS + 1, sizeof(int));
 	pipex->envp = envp;
-	pipex->tokens = (t_token **) malloc(sizeof(t_token *) * (NUM_COMMANDS + 1));
+	pipex->tokens = (t_token **) ft_calloc(NUM_COMMANDS + 1, sizeof(t_token *));
 	if (pipex->tokens == NULL)
 	{
 		free_pipex(&pipex);
