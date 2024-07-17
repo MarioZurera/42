@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:17:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 19:24:15 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:36:39 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_pipex	*ft_init_pipex(char **argv, char **envp, int NUM_COMMANDS)
 		return (NULL);
 	pipex->pids = ft_calloc(NUM_COMMANDS + 1, sizeof(int));
 	pipex->envp = envp;
+	create_in_out_fd(pipex, argv, NUM_COMMANDS);
 	pipex->tokens = (t_token **) ft_calloc(NUM_COMMANDS + 1, sizeof(t_token *));
 	if (pipex->tokens == NULL)
 	{
