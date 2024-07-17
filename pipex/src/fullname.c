@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:13:46 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/16 21:32:03 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:53:34 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	**ft_get_names(char **argv, int NUM_COMMANDS)
 	i = 0;
 	j = 0;
 	cmd_names = (char **) malloc(sizeof(char *) * (NUM_COMMANDS + 1));
-	if (cmd_names == NULL || argv[i] == NULL || argv[i + 1] == NULL || argv[i + 2] == NULL)
+	if (!cmd_names || !argv[i] || !argv[i + 1] || !argv[i + 2])
 	{
 		free(cmd_names);
 		return (NULL);
