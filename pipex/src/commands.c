@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:46:47 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 19:32:57 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/17 21:36:07 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static int	set_in_out(int input_fd, int output_fd)
 {
 	int	res;
 
-	res = (dup2(input_fd, STDIN_FILENO) < 0
-			|| dup2(output_fd, STDOUT_FILENO) < 0);
+	res = (dup2(input_fd, STDIN_FILENO) >= 0
+			&& dup2(output_fd, STDOUT_FILENO) >= 0);
 	close(input_fd);
 	close(output_fd);
 	if (!res)
@@ -35,9 +35,9 @@ static void	exec_command(t_pipex *pipex, t_token *token, int pid, int *fd)
 		close(fd[1]);
 		exit(1);
 	}
-	if (access(token->fullname, F_OK) == -1)
+	if (access(token->fullname, F_OK) < 0
+			&& access(token->fullname, X_OK) < 0 && pid > 0)
 	{
-		pipex->pids[token->number] = -1;
 		if (ft_strchr(token->fullname, '/'))
 			print_error_file(token->fullname);
 		else
@@ -46,6 +46,8 @@ static void	exec_command(t_pipex *pipex, t_token *token, int pid, int *fd)
 	}
 	if (pid == 0)
 	{
+		close(pipex->out_fd);
+		close(fd[0]);
 		execve(token->fullname, token->args, pipex->envp);
 	}
 	if (pid > 0)
@@ -68,6 +70,7 @@ static int	wait_commands(t_pipex *pipex)
 			i++;
 			continue ;
 		}
+		// Esperar solo al ultimo proceso y si termina matar los anteriores.
 		waitpid(pipex->pids[i], &status, 0);
 		if (WIFEXITED(status))
 			WEXITSTATUS(status);
@@ -85,7 +88,6 @@ static void	create_pipe(int fd[2])
 {
 	if (pipe(fd) < 0)
 		print_error_pipe();
-	return (fd);
 }
 
 int	run_commands(t_pipex *pipex)
@@ -113,5 +115,6 @@ int	run_commands(t_pipex *pipex)
 		close(fd[0]);
 		i++;
 	}
+	close(last_input);
 	return (wait_commands(pipex));
 }
