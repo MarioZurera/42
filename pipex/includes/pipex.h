@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 19:34:59 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 14:21:59 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <sys/wait.h>
+
+enum e_error_code {
+	NO_CHILD_PROCESS = 10,
+	MANY_FD_OPEN = 24,
+	PERMISSION_DENIED = 126,
+	COMMAND_NOT_FOUND = 127,
+	NO_FILE_OR_DIR = 127
+};
 
 typedef struct s_token
 {
@@ -44,28 +52,12 @@ typedef struct s_pipex
 void	print_error(unsigned int n_params, ...);
 
 /**
- * @brief Print an error message when a file is not found.
- * @param name Name of the file that was not found.
+ * @brief Print an error message and exit the program with the error code.
+ * @param name Name of the error.
+ * @param code Error code.
+ * @param pipex The pipex structure.
 */
-void	print_error_file(char *name);
-
-/**
- * @brief Print an error message when a command is not found.
- * @param name Name of the command.
-*/
-void	print_error_command(char *name);
-
-/**
- * @brief Print an error message when a file descriptor cannot be duplicated.
- * @note This function is called when a dup or dup2 function fails.
-*/
-void	print_error_dup(void);
-
-/**
- * @brief Print an error message when a pipe cannot be created.
- * @note This function is called when a pipe function fails.
-*/
-void	print_error_pipe(void);
+void	print_error_code(char *name, int code, t_pipex *pipex);
 
 /**
  * @brief Get the fullname of the commands.

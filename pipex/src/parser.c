@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:17:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 19:56:21 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 14:21:04 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,9 @@ static int	create_in_out_fd(t_pipex *pipex, char **argv, int NUM_COMMANDS)
 	pipex->out_fd = open(argv[NUM_COMMANDS + 2],
 			O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (pipex->in_fd < 0)
-		print_error_file(argv[1]);
+		print_error_code(argv[1], NO_FILE_OR_DIR, pipex);
 	if (pipex->out_fd < 0)
-		print_error_file(argv[NUM_COMMANDS + 2]);
-	if (pipex->in_fd < 0 || pipex->out_fd < 0)
-	{
-		free_pipex(&pipex);
-		return (0);
-	}
+		print_error_code(argv[NUM_COMMANDS + 2], NO_FILE_OR_DIR, pipex);
 	return (1);
 }
 
