@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:39:27 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 16:25:34 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:19:37 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int	here_doc(t_pipex *pipex, char *limiter)
 			break ;
 		write(fd, line, ft_strlen(line));
 	}
+	close(fd);
+	fd = open("/tmp/here_doc", O_RDONLY);
 	return (fd);
 }

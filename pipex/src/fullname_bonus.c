@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fullname.c                                         :+:      :+:    :+:   */
+/*   fullname_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:13:46 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/17 19:00:18 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:16:04 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ static char	**ft_cmd_fullname(char **cmd_names, char **paths, int NUM_COMMANDS)
 
 char	**ft_fullname(char **argv, char **envp, int NUM_COMMANDS)
 {
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+		argv++;
 	return (ft_cmd_fullname(ft_get_names(argv, NUM_COMMANDS),
 			ft_get_paths(envp), NUM_COMMANDS));
 }
