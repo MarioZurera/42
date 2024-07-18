@@ -6,21 +6,21 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:17:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 16:30:29 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:38:04 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static int	create_in_out_fd(t_pipex *pipex, char **argv, int NUM_COMMANDS)
+static int	create_in_out_fd(t_pipex *pipex, char **argv, int *NUM_COMMANDS)
 {
 	pipex->in_fd = open(argv[1], O_RDONLY);
-	pipex->out_fd = open(argv[NUM_COMMANDS + 2],
+	pipex->out_fd = open(argv[*NUM_COMMANDS + 2],
 			O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (pipex->in_fd < 0)
 		print_error_code(argv[1], NO_FILE_OR_DIR, pipex);
 	if (pipex->out_fd < 0)
-		print_error_code(argv[NUM_COMMANDS + 2], NO_FILE_OR_DIR, pipex);
+		print_error_code(argv[*NUM_COMMANDS + 2], NO_FILE_OR_DIR, pipex);
 	return (1);
 }
 

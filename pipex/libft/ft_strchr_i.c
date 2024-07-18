@@ -6,13 +6,13 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:23:33 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 16:12:33 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:42:20 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strchr_i(const char *s, int c)
+int	ft_strchr_i(const char *s, int c)
 {
 	char	*res;
 

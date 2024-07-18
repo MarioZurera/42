@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 16:28:11 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:36:21 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	***ft_args(char **argv, int NUM_COMMANDS);
  * @param NUM_COMMANDS Number of commands to be executed.
  * @return A pointer to the pipex structure.
 */
-t_pipex	*ft_init_pipex(char **argv, char **envp, int NUM_COMMANDS);
+t_pipex	*ft_init_pipex(char **argv, char **envp, int *NUM_COMMANDS);
 
 /**
  * @brief Free the pipex structure.

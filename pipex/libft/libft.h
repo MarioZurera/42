@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 16:18:55 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:43:07 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ char			*ft_strchr(const char *s, int c);
  * @return The index to the character found or -1
  * if the char is not found.
 */
-size_t			ft_strchr_i(const char *s, int c);
+int				ft_strchr_i(const char *s, int c);
 
 /**
  * @brief Locate the last occurrence of the character c 

@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 19:17:20 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 16:31:13 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:38:38 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,26 +86,26 @@ static void	ft_init_tokens(t_pipex **ptr_pipex, char **paths, char ***args)
 	free(args);
 }
 
-t_pipex	*ft_init_pipex(char **argv, char **envp, int NUM_COMMANDS)
+t_pipex	*ft_init_pipex(char **argv, char **envp, int *NUM_COMMANDS)
 {
 	t_pipex	*pipex;
 
 	pipex = (t_pipex *) malloc(sizeof(t_pipex));
 	if (pipex == NULL)
 		return (NULL);
-	pipex->pids = ft_calloc(NUM_COMMANDS + 1, sizeof(int));
+	pipex->pids = ft_calloc(*NUM_COMMANDS + 1, sizeof(int));
 	pipex->envp = envp;
 	if (!create_in_out_fd(pipex, argv, NUM_COMMANDS))
 		return (NULL);
-	pipex->tokens = (t_token **) ft_calloc(NUM_COMMANDS + 1, sizeof(t_token *));
+	pipex->tokens = (t_token **) ft_calloc(*NUM_COMMANDS + 1, sizeof(t_token *));
 	if (pipex->tokens == NULL)
 	{
 		free_pipex(&pipex);
 		return (NULL);
 	}
 	ft_init_tokens(&pipex,
-		ft_fullname(argv, envp, NUM_COMMANDS),
-		ft_args(argv, NUM_COMMANDS)
+		ft_fullname(argv, envp, *NUM_COMMANDS),
+		ft_args(argv, *NUM_COMMANDS)
 		);
 	return (pipex);
 }
