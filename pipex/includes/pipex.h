@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 16:36:21 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:56:15 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ enum e_error_code
 	MANY_FD_OPEN = 24,
 	PERMISSION_DENIED = 126,
 	COMMAND_NOT_FOUND = 127,
-	NO_FILE_OR_DIR = 127
+	NO_FILE_OR_DIR = 128
 };
 
 typedef struct s_token
