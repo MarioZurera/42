@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 14:21:59 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:28:11 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include <stdarg.h>
 # include <sys/wait.h>
 
-enum e_error_code {
+enum e_error_code
+{
 	NO_CHILD_PROCESS = 10,
 	MANY_FD_OPEN = 24,
 	PERMISSION_DENIED = 126,
@@ -42,6 +43,7 @@ typedef struct s_pipex
 	int		out_fd;
 	char	**envp;
 	int		*pids;
+	char	*limiter;
 	t_token	**tokens;
 }	t_pipex;
 
@@ -97,6 +99,14 @@ void	free_pipex(t_pipex **pipex);
  * @return The status of the execution.
 */
 int		run_commands(t_pipex *pipex);
+
+/**
+ * @brief Execute the here document operation.
+ * @param pipex The pipex structure with the commands to be executed.
+ * @param limiter The limiter to stop the here document.
+ * @return The file descriptor to the here document.
+*/
+int		here_doc(t_pipex *pipex, char *limiter);
 
 int		main(int argc, char **argv, char **envp);
 

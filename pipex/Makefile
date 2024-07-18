@@ -23,7 +23,7 @@ SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_NAME))
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_NAME))
 
 # BONUS #
-BONUS_SRC_NAME	= pipex_bonus.c parser_bonus.c fullname_bonus.c args_bonus.c error_bonus.c commands_bonus.c
+BONUS_SRC_NAME	= pipex_bonus.c parser_bonus.c fullname_bonus.c args_bonus.c error_bonus.c commands_bonus.c here_doc_bonus.c
 BONUS_OBJ_NAME	= $(notdir $(BONUS_SRC_NAME:.c=.o))
 BONUS_SRCS		= $(addprefix $(SRC_DIR)/,$(BONUS_SRC_NAME))
 BONUS_OBJS		= $(addprefix $(OBJ_DIR)/,$(BONUS_OBJ_NAME))
@@ -59,12 +59,13 @@ $(NAME): $(OBJS)
 
 clean:
 	@$(RM_DIR) $(OBJ_DIR)
-	@make fclean -s -C $(LIB_DIR)
+	@make clean -s -C $(LIB_DIR)
 	@echo "$(C_RED)Cleaned objects folder!$(C_DEF)"
 
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(LIBFT)
+	@make fclean -s -C $(LIB_DIR)
 	@echo "$(C_RED)Cleaned $(NAME) program!$(C_DEF)"
 
 re: fclean all
