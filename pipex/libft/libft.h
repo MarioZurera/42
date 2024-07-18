@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:27:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/16 20:54:29 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:18:55 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <stdarg.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 80
+# endif /* BUFFER_SIZE */
+
+# ifndef FD_LIMIT
+#  define FD_LIMIT 256
+# endif /* FD_LIMIT */
 
 typedef enum e_bool
 {
@@ -565,6 +573,14 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
  * @return The number of bytes printed into the standard output.
  */
 int				ft_printf(const char *format, ...);
+
+/**
+ * @brief Read a line from a file descriptor.
+ * @param fd The file descriptor.
+ * @return The line read from the file descriptor.
+ * @note The line is ended by a '\\n'.
+*/
+char			*get_next_line(int fd);
 
 /**
  * @brief Free a multidimensional array.
