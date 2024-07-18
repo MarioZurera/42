@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:46:47 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 14:19:44 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:30:07 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static int	wait_commands(t_pipex *pipex)
 	}
 	return (status);
 }
-
 
 static void	create_pipe(t_pipex *pipex, int fd[2])
 {

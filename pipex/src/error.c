@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:34:44 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 14:23:54 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:30:44 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	print_error(unsigned int n_params, ...)
 	free(buffer);
 	va_end(args);
 }
+
 static void	print_error_fd(char *name)
 {
 	if (ft_strncmp(name, "pipe", 4) == 0)
@@ -50,7 +51,7 @@ static void	print_error_command(char *name)
 	if (ft_strchr(name, '/') != NULL)
 		print_error(3, "pipex: ", name, ": No such file or directory\n");
 	else
-	print_error(3, "pipex: ", name, ": command not found\n");
+		print_error(3, "pipex: ", name, ": command not found\n");
 }
 
 void	print_error_code(char *name, int code, t_pipex *pipex)
