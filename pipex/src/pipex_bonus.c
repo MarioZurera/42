@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 20:25:00 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 16:52:20 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:52:23 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	int				num_commands;
 	int				status;
 
-	if (argc < 3)
+	if (argc < 5)
 	{
 		ft_printf(
 			"Usage: %s <infile> <command1> <command2> ... %s",

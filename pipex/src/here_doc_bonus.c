@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 15:39:27 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/18 17:19:37 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:54:19 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	here_doc(t_pipex *pipex, char *limiter)
 	while (true)
 	{
 		line = get_next_line(0);
-		if (ft_strncmp(line, limiter, limiter_len - 1) == 0)
+		if (line == NULL || ft_strncmp(line, limiter, limiter_len - 1) == 0)
 			break ;
 		write(fd, line, ft_strlen(line));
 	}
