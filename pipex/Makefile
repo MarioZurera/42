@@ -1,11 +1,10 @@
 # COMMANDS #
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g
+CC			= clang
+CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -f
 RM_DIR		= rm -rf
 
 # DIRECTORIES #
-
 SRC_DIR		= src
 OBJ_DIR		= objects
 INC_DIR		= includes
@@ -75,10 +74,5 @@ bonus: $(BONUS_OBJS)
 	@make all -s -C ./$(LIB_DIR)/
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) -L./$(LIB_DIR) ./$(LIB_DIR)/$(LIBFT) -o $(NAME)
 	@echo "$(C_GREEN)$(CAP_NAME) built and ready to go!$(C_DEF)"
-
-test: $(NAME)
-	@./pipex in "echo '123'" out
-	@echo "\n"
-	@$(RM) ./pipex
 
 .PHONY: all bonus clean fclean re .c.o
