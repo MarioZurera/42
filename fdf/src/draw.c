@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:58:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/20 15:58:53 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:37:25 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,51 +30,116 @@ void	ft_draw_background(t_fdf *fdf, uint32_t color)
 	}
 }
 
-static void calculate_coords(t_fdf *fdf, t_coord *coords)
-{
-	int	h;
-
-	h = 0;
-	if (fdf->min.x < 0)
-	{
-		h = fdf->min.x;
-		h *= -1;
-		if (h < 0)
-			return ;
-		coords->x += h;
-	}
-	if (fdf->min.y < 0)
-	{
-		h = fdf->min.y;
-		h *= -1;
-		if (h < 0)
-			return ;
-		coords->y += h;
-	}
-	coords->x *= ((fdf->width - (2 * SCREEN_OFFSET_W)) / fdf->dims.x);
-	coords->y *= ((fdf->height - (2 * SCREEN_OFFSET_H)) / fdf->dims.y);
-	coords->x += SCREEN_OFFSET_W;
-	coords->y += SCREEN_OFFSET_H;
-}
-
-void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height)
+static void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height)
 {
 	uint32_t	color;
 	uint32_t	factor;
 
-	if (coords->x < 0 && (size_t) coords->x >= fdf->width
-		&& coords->y < 0 && (size_t) coords->y >= fdf->height)
+	if (coords->x < 0 || (size_t) coords->x >= fdf->width
+		|| coords->y < 0 || (size_t) coords->y >= fdf->height)
 		return ;
-	calculate_coords(fdf, coords);
 	if (fdf->z_coords.y != fdf->z_coords.x)
 		factor = (height - fdf->z_coords.x) / (fdf->z_coords.y - fdf->z_coords.x);
 	else
-		factor = 1;
+		factor = 0;
 	color = ft_color_gradient(LOW_COLOR, HIGH_COLOR, factor);
+	/*mlx_put_pixel(fdf->image, coords->x - 3, coords->y, color);
+	mlx_put_pixel(fdf->image, coords->x - 2, coords->y, color);
+	mlx_put_pixel(fdf->image, coords->x - 1, coords->y, color);
+	mlx_put_pixel(fdf->image, coords->x + 1, coords->y, color);
+	mlx_put_pixel(fdf->image, coords->x + 2, coords->y, color);
+	mlx_put_pixel(fdf->image, coords->x + 3, coords->y, color);
+	mlx_put_pixel(fdf->image, coords->x, coords->y + 1, color);
+	mlx_put_pixel(fdf->image, coords->x - 3, coords->y + 1, color);
+	mlx_put_pixel(fdf->image, coords->x - 2, coords->y + 1, color);
+	mlx_put_pixel(fdf->image, coords->x - 1, coords->y + 1, color);
+	mlx_put_pixel(fdf->image, coords->x + 1, coords->y + 1, color);
+	mlx_put_pixel(fdf->image, coords->x + 2, coords->y + 1, color);
+	mlx_put_pixel(fdf->image, coords->x + 3, coords->y + 1, color);
+	mlx_put_pixel(fdf->image, coords->x, coords->y - 1, color);
+	mlx_put_pixel(fdf->image, coords->x - 3, coords->y - 1, color);
+	mlx_put_pixel(fdf->image, coords->x - 2, coords->y - 1, color);
+	mlx_put_pixel(fdf->image, coords->x - 1, coords->y - 1, color);
+	mlx_put_pixel(fdf->image, coords->x + 1, coords->y - 1, color);
+	mlx_put_pixel(fdf->image, coords->x + 2, coords->y - 1, color);
+	mlx_put_pixel(fdf->image, coords->x + 3, coords->y - 1, color);
+	mlx_put_pixel(fdf->image, coords->x, coords->y + 2, color);
+	mlx_put_pixel(fdf->image, coords->x - 3, coords->y + 2, color);
+	mlx_put_pixel(fdf->image, coords->x - 2, coords->y + 2, color);
+	mlx_put_pixel(fdf->image, coords->x - 1, coords->y + 2, color);
+	mlx_put_pixel(fdf->image, coords->x + 1, coords->y + 2, color);
+	mlx_put_pixel(fdf->image, coords->x + 2, coords->y + 2, color);
+	mlx_put_pixel(fdf->image, coords->x + 3, coords->y + 2, color);
+	mlx_put_pixel(fdf->image, coords->x, coords->y - 2, color);
+	mlx_put_pixel(fdf->image, coords->x - 3, coords->y - 2, color);
+	mlx_put_pixel(fdf->image, coords->x - 2, coords->y - 2, color);
+	mlx_put_pixel(fdf->image, coords->x - 1, coords->y - 2, color);
+	mlx_put_pixel(fdf->image, coords->x + 1, coords->y - 2, color);
+	mlx_put_pixel(fdf->image, coords->x + 2, coords->y - 2, color);
+	mlx_put_pixel(fdf->image, coords->x + 3, coords->y - 2, color);
+	mlx_put_pixel(fdf->image, coords->x, coords->y + 3, color);
+	mlx_put_pixel(fdf->image, coords->x - 3, coords->y + 3, color);
+	mlx_put_pixel(fdf->image, coords->x - 2, coords->y + 3, color);
+	mlx_put_pixel(fdf->image, coords->x - 1, coords->y + 3, color);
+	mlx_put_pixel(fdf->image, coords->x + 1, coords->y + 3, color);
+	mlx_put_pixel(fdf->image, coords->x + 2, coords->y + 3, color);
+	mlx_put_pixel(fdf->image, coords->x + 3, coords->y + 3, color);
+	mlx_put_pixel(fdf->image, coords->x, coords->y - 3, color);
+	mlx_put_pixel(fdf->image, coords->x - 3, coords->y - 3, color);
+	mlx_put_pixel(fdf->image, coords->x - 2, coords->y - 3, color);
+	mlx_put_pixel(fdf->image, coords->x - 1, coords->y - 3, color);
+	mlx_put_pixel(fdf->image, coords->x + 1, coords->y - 3, color);
+	mlx_put_pixel(fdf->image, coords->x + 2, coords->y - 3, color);
+	mlx_put_pixel(fdf->image, coords->x + 3, coords->y - 3, color);*/
 	mlx_put_pixel(fdf->image, coords->x, coords->y, color);
 }
 
-void	ft_draw_line()
+void	ft_draw_line(t_fdf *fdf, t_draw_point *pA, t_draw_point *pB)
 {
-	
+	double	num_pixels;
+	double	deltaX;
+	double	deltaY;
+	double	pixelX;
+	double	pixelY;
+
+	deltaX = pB->coords.x - pA->coords.x;
+	deltaY = pB->coords.y - pA->coords.y;
+	num_pixels = round(sqrt((deltaX * deltaX) + (deltaY * deltaY)));
+	printf("num_pixels: %f\n", num_pixels);
+	deltaX /= num_pixels;
+	deltaY /= num_pixels;
+	pixelX = pA->coords.x;
+	pixelY = pA->coords.y;
+	while (num_pixels-- > 0)
+	{
+		// mlx_put_pixel(fdf->image, pixelX *30, pixelY*30, 0xFFFFFF);
+		ft_draw_point(fdf, &(t_coord){pixelX, pixelY}, pA->z);
+		pixelX += deltaX;
+		pixelY += deltaY;
+	}
 }
+
+/*
+static int get_pixel(double i, double a, double b)
+{
+	int x = (round(((i / NUMBER_GRADIENT) * (b - a)) + a));
+	return (x);
+}
+
+void	ft_draw_line(t_fdf *fdf, t_draw_point *pA, t_draw_point *pB)
+{
+	size_t	i;
+	t_coord point;
+	int		height;
+
+	i = 0;
+	while (i <= NUMBER_GRADIENT)
+	{
+		point.x = get_pixel(i, pA->coords.x, pB->coords.x);
+		point.y = get_pixel(i, pA->coords.y, pB->coords.y);
+		height = get_pixel(i, pA->z, pB->z);
+		ft_draw_point(fdf, &point, height);
+		i++;
+	}
+}
+*/

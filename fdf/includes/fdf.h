@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/20 15:54:10 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:11:50 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@
 /* To-Check libs */
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 /* CONSTANTS */
-# define SCREEN_WIDTH 1000
-# define SCREEN_HEIGHT 1000
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGHT 2000
 # define SCREEN_OFFSET_H 125
 # define SCREEN_OFFSET_W 125
+# define WINDOW_TITLE "FdF"
+# define NUMBER_GRADIENT 1000
+
+
 
 /* COLORS */
 # define HIGH_COLOR 0xFF0000FF
@@ -41,8 +46,8 @@ typedef enum e_error
 
 typedef struct s_coord
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }	t_coord;
 
 typedef struct s_draw_point
@@ -87,10 +92,10 @@ void	free_fdf(t_fdf **ptr_fdf);
  * @brief Get the color gradient with the specified factor
  * @param hex1 The low color
  * @param hex2 The high color
- * @param factor The factor to calculate the gradient, a number between 0 and 1
+ * @param factor The factor to calculate the gradient, a number between 0 and NUMBER_GRADIENT
  * @return The color between hex1 and hex2 by a factor percentage
 */
-uint32_t	ft_color_gradient(uint32_t hex1, uint32_t hex2, uint8_t factor);
+uint32_t	ft_color_gradient(uint32_t hex1, uint32_t hex2, uint32_t factor);
 
 /**
  * @brief Draw the screen background with the specified color
@@ -106,7 +111,15 @@ void	ft_draw_background(t_fdf *fdf, uint32_t color);
  * @param coords The coordinates of the point in 2D representation
  * @param height The height of the point for the color gradient
 */
-void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height);
+//void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height);
+
+/**
+ * @brief Draw a line between two points on the screen
+ * @param fdf The fdf structure
+ * @param pA The first point
+ * @param pB The second point
+*/
+void	ft_draw_line(t_fdf *fdf, t_draw_point *pA, t_draw_point *pB);
 
 /**
  * @brief Print the fdf map on the screen

@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/20 15:31:39 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:48:18 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_fdf	*ft_init_fdf(uint32_t width, uint32_t height,
 	fdf->width = width;
 	fdf->height = height;
 	fdf->map = ft_init_map(filename, fdf);
-	fdf->mlx = mlx_init(width, height, "FdF", resize);
+	fdf->mlx = mlx_init(width, height, WINDOW_TITLE, resize);
 	if (fdf->mlx == NULL)
 		print_error(FDF_INIT_ERROR, fdf, NULL);
 	fdf->image = mlx_new_image(fdf->mlx, width, height);
