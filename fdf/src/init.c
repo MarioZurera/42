@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/19 20:09:52 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:31:39 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,13 @@ static int	*matrix_line(const char *line, size_t len)
 	int		*nums;
 	char	**words;
 	size_t	i;
-	size_t	size;
 
 	if (line == NULL)
 		return (NULL);
 	nums = ft_calloc(len + 1, sizeof(int));
 	words = ft_split(line, ' ');
-	size = (sizeof(words) / sizeof(words[0]));
 	i = 0;
-	while (i < size)
+	while (i < len && words[i] != NULL)
 	{
 		nums[i] = ft_atoi(words[i]);
 		free(words[i]);
