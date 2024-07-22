@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:58:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/20 20:37:25 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 13:18:09 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void	ft_draw_line(t_fdf *fdf, t_draw_point *pA, t_draw_point *pB)
 	deltaX = pB->coords.x - pA->coords.x;
 	deltaY = pB->coords.y - pA->coords.y;
 	num_pixels = round(sqrt((deltaX * deltaX) + (deltaY * deltaY)));
-	printf("num_pixels: %f\n", num_pixels);
 	deltaX /= num_pixels;
 	deltaY /= num_pixels;
 	pixelX = pA->coords.x;

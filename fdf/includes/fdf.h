@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/20 20:11:50 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 13:02:44 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_fdf
 	size_t	height;
 	size_t	matrix_width;
 	size_t	matrix_height;
-	t_coord dims;
+	t_coord scale;
 	t_coord	z_coords;
 	t_coord min;
 }	t_fdf;

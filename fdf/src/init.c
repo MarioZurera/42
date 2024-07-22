@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/20 16:48:18 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 13:10:02 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ t_fdf	*ft_init_fdf(uint32_t width, uint32_t height,
 	res = mlx_image_to_window(fdf->mlx, fdf->image, 0, 0);
 	if (res < 0)
 		print_error(FDF_INIT_ERROR, fdf, NULL);
+	fdf->scale = (t_coord){1, 1};
 	return (fdf);
 }
