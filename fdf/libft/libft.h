@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:10:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/19 18:10:45 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:03:39 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -472,6 +472,42 @@ int				ft_max(int a, int b);
  * @note If the integers a and b are equal, the integer a is returned.
 */
 int				ft_min(int a, int b);
+
+/**
+ * @brief Get the maximum value between the floats a and b.
+ * @param a The first float.
+ * @param b The second float.
+ * @return The maximum value between the floats a and b.
+ * @note If the floats a and b are equal, the float a is returned.
+*/
+float			ft_maxf(float a, float b);
+
+/**
+ * @brief Get the maximum value between the double a and b.
+ * @param a The first double.
+ * @param b The second double.
+ * @return The maximum value between the double a and b.
+ * @note If the double a and b are equal, the double a is returned.
+*/
+double			ft_mind(double a, double b);
+
+/**
+ * @brief Get the minimum value between the double a and b.
+ * @param a The first double.
+ * @param b The second double.
+ * @return The minimum value between the double a and b.
+ * @note If the double a and b are equal, the double a is returned.
+*/
+double			ft_maxd(double a, double b);
+
+/**
+ * @brief Get the minimum value between the floats a and b.
+ * @param a The first float.
+ * @param b The second float.
+ * @return The minimum value between the floats a and b.
+ * @note If the floats a and b are equal, the float a is returned.
+ */
+float			ft_minf(float a, float b);
 
 /**
  * @brief Get the number of digits of the integer n.
