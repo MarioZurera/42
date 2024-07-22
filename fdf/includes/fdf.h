@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 13:59:56 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:59:36 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,27 @@ void	free_fdf(t_fdf **ptr_fdf);
  * @return The color between hex1 and hex2 by a factor percentage
 */
 uint32_t	ft_color_gradient(uint32_t hex1, uint32_t hex2, uint32_t factor);
+
+/**
+ * @brief Get the isometric coordinates of a point in 3D space
+ * @param fdf The fdf structure
+ * @param x The x coordinate
+ * @param y The y coordinate
+ * @param z The z coordinate
+ * @return The isometric coordinates of the point
+ */
+t_coord	isometric_non_scaled(t_fdf *fdf, int x, int y, int z);
+
+/**
+ * @brief Get the isometric coordinates of a point in 3D space
+ * @param fdf The fdf structure
+ * @param x The x coordinate
+ * @param y The y coordinate
+ * @param z The z coordinate
+ * @return The isometric coordinates of the point
+ * @note The coordinates are scaled and normalized to the screen size
+ */
+t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z);
 
 /**
  * @brief Draw the screen background with the specified color

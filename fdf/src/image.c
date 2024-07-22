@@ -6,29 +6,11 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:19:02 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 14:05:34 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:59:39 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z)
-{
-	t_coord	coords;
-
-	// printf("fdf->scale.x: %f\n", fdf->scale.x);
-	// printf("fdf->scale.y: %f\n", fdf->scale.y);
-	// Multiplied by 10 so it doesn't collide that much
-	// TO-DO: look for a proper formula to get the correct scale for any given map
-	// TO-DO: normalize the map to get lower slopes (max - min height)
-	coords.x = ((sqrt(3) / sqrt(6)) * (x - z)) * fdf->scale.x;
-	coords.y = ((1 /sqrt(6)) * (x + 2 * y + z)) * fdf->scale.y;
-	coords.x += SCREEN_OFFSET_W;
-	coords.y += SCREEN_OFFSET_H;
-	return (coords);
-}
-
-
 
 static void	create_lines(t_fdf *fdf, size_t i, size_t j)
 {
@@ -74,6 +56,29 @@ static t_coord	get_height(t_fdf *fdf)
 	return (height);
 }
 
+static t_coord	get_min_coords(t_fdf *fdf)
+{
+	int				i;
+	int				j;
+	t_coord			min;
+	t_coord			coords;
+
+	min = isometric_non_scaled(fdf, 0, 0, fdf->map[0][0]);
+	i = -1;
+	while ((size_t)(++i) < fdf->matrix_height)
+	{
+		j = -1;
+		while ((size_t)(++j) < fdf->matrix_width)
+		{
+			coords = isometric_non_scaled(fdf, j, i, fdf->map[i][j]);
+			min.x = ft_mind(min.x, coords.x);
+			min.y = ft_mind(min.y, coords.y);
+		}
+	}
+	return (min);
+
+}
+
 static t_coord	get_isometric_scale(t_fdf *fdf)
 {
 	int				i;
@@ -81,37 +86,27 @@ static t_coord	get_isometric_scale(t_fdf *fdf)
 	t_coord			max;
 	t_coord			coords;
 
-	fdf->min = isometric_coordinates(fdf, 0, 0, fdf->map[0][0]);
-	max.x = fdf->min.x;
-	max.y = fdf->min.y;
+	max = isometric_non_scaled(fdf, 0, 0, fdf->map[0][0]);;
 	i = -1;
 	while ((size_t)(++i) < fdf->matrix_height)
 	{
 		j = -1;
 		while ((size_t)(++j) < fdf->matrix_width)
 		{
-			coords = isometric_coordinates(fdf, j, i, fdf->map[i][j]);
-			fdf->min.x = ft_mind(fdf->min.x, coords.x);
-			fdf->min.y = ft_mind(fdf->min.y, coords.y);
+			coords = isometric_non_scaled(fdf, j, i, fdf->map[i][j]);
 			max.x = ft_maxd(max.x, coords.x);
 			max.y = ft_maxd(max.y, coords.y);
 		}
 	}
-	printf("fdf->scale: %f, %f\n", fdf->scale.x, fdf->scale.y);
-	printf("fdf->max.x: %f\n", max.x);
-	printf("fdf->max.y: %f\n", max.y);
 	/*
 		(iso + OFF) * X = fdf->width - OFF
 	*/
-	coords.x = (fdf->width - (2 * SCREEN_OFFSET_W)) / (max.x - SCREEN_OFFSET_W);
-	coords.y = (fdf->height - (2 * SCREEN_OFFSET_H)) / (max.y - SCREEN_OFFSET_H);
-	printf("fdf->scale.x: %f\n", coords.x);
-	printf("fdf->scale.y: %f\n", coords.y);
-	printf("max.x: %f\n", max.x);
-	printf("max.y: %f\n", max.y);
-	printf("max2.x: %f\n", (max.x - SCREEN_OFFSET_W) * coords.x);
-	printf("max2.y: %f\n", (max.y - SCREEN_OFFSET_H) * coords.y);
-	return ((t_coord){ft_mind(coords.x, coords.y), ft_mind(coords.x, coords.y)});
+	coords.x = (fdf->width - (2 * SCREEN_OFFSET_W)) / max.x;
+	coords.y = (fdf->height - (2 * SCREEN_OFFSET_H)) / max.y;
+	printf("max.x: %f, max.y: %f\n", max.x, max.y);
+	printf("coords.x: %f, coords.y: %f\n", coords.x, coords.y);
+	return (coords);
+	// return ((t_coord){ft_mind(coords.x, coords.y), ft_mind(coords.x, coords.y)});
 }
 
 void	ft_process_image(t_fdf *fdf)
@@ -120,8 +115,9 @@ void	ft_process_image(t_fdf *fdf)
 	size_t			j;
 
 	ft_draw_background(fdf, BACKGROUND_COLOR);
-	fdf->scale = get_isometric_scale(fdf);
 	fdf->z_coords = get_height(fdf);
+	fdf->min = get_min_coords(fdf);
+	fdf->scale = get_isometric_scale(fdf);
 	i = 0;
 	while (i < fdf->matrix_height)
 	{

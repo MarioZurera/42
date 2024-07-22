@@ -22,7 +22,7 @@ NAME		= fdf
 CAP_NAME	= $(shell echo $(NAME) | awk '{print toupper(substr($$0, 1, 1)) substr($$0, 2)}')
 
 # NORMAL #
-SRC_NAME	= fdf.c init.c image.c draw.c color.c error.c
+SRC_NAME	= fdf.c init.c image.c draw.c color.c coordinates.c error.c
 OBJ_NAME	= $(notdir $(SRC_NAME:.c=.o))
 SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_NAME))
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_NAME))

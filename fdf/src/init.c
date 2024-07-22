@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 13:10:02 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:04:52 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ t_fdf	*ft_init_fdf(uint32_t width, uint32_t height,
 	t_fdf	*fdf;
 	int		res;
 
-	fdf = malloc(sizeof(t_fdf));
+	fdf = ft_calloc(1, sizeof(t_fdf));
 	if (fdf == NULL)
 		print_error(FDF_INIT_ERROR, fdf, NULL);
 	fdf->width = width;
