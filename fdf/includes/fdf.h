@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 13:02:44 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 13:59:56 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdio.h>
 
 /* CONSTANTS */
-# define SCREEN_WIDTH 2000
-# define SCREEN_HEIGHT 2000
+# define SCREEN_WIDTH 1000
+# define SCREEN_HEIGHT 1000
 # define SCREEN_OFFSET_H 125
 # define SCREEN_OFFSET_W 125
 # define WINDOW_TITLE "FdF"

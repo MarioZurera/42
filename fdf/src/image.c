@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:19:02 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 13:26:54 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:05:34 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z)
 	// TO-DO: normalize the map to get lower slopes (max - min height)
 	coords.x = ((sqrt(3) / sqrt(6)) * (x - z)) * fdf->scale.x;
 	coords.y = ((1 /sqrt(6)) * (x + 2 * y + z)) * fdf->scale.y;
-	// coords.x += SCREEN_OFFSET_W;
-	// coords.y += SCREEN_OFFSET_H;
+	coords.x += SCREEN_OFFSET_W;
+	coords.y += SCREEN_OFFSET_H;
 	return (coords);
 }
 
@@ -91,20 +91,27 @@ static t_coord	get_isometric_scale(t_fdf *fdf)
 		while ((size_t)(++j) < fdf->matrix_width)
 		{
 			coords = isometric_coordinates(fdf, j, i, fdf->map[i][j]);
-			fdf->min.x = ft_min((int) fdf->min.x, (int) coords.x);
-			fdf->min.y = ft_min((int) fdf->min.y, (int) coords.y);
-			max.x = ft_max((int) max.x, (int) coords.x);
-			max.y = ft_max((int) max.y, (int) coords.y);
+			fdf->min.x = ft_mind(fdf->min.x, coords.x);
+			fdf->min.y = ft_mind(fdf->min.y, coords.y);
+			max.x = ft_maxd(max.x, coords.x);
+			max.y = ft_maxd(max.y, coords.y);
 		}
 	}
 	printf("fdf->scale: %f, %f\n", fdf->scale.x, fdf->scale.y);
 	printf("fdf->max.x: %f\n", max.x);
 	printf("fdf->max.y: %f\n", max.y);
-	coords.x = (fdf->width - SCREEN_OFFSET_W) / max.x;
-	coords.y = (fdf->height - SCREEN_OFFSET_H) / max.y;
-	printf("fdf->width: %f\n", coords.x);
-	printf("fdf->height: %f\n", coords.y);
-	return (coords);
+	/*
+		(iso + OFF) * X = fdf->width - OFF
+	*/
+	coords.x = (fdf->width - (2 * SCREEN_OFFSET_W)) / (max.x - SCREEN_OFFSET_W);
+	coords.y = (fdf->height - (2 * SCREEN_OFFSET_H)) / (max.y - SCREEN_OFFSET_H);
+	printf("fdf->scale.x: %f\n", coords.x);
+	printf("fdf->scale.y: %f\n", coords.y);
+	printf("max.x: %f\n", max.x);
+	printf("max.y: %f\n", max.y);
+	printf("max2.x: %f\n", (max.x - SCREEN_OFFSET_W) * coords.x);
+	printf("max2.y: %f\n", (max.y - SCREEN_OFFSET_H) * coords.y);
+	return ((t_coord){ft_mind(coords.x, coords.y), ft_mind(coords.x, coords.y)});
 }
 
 void	ft_process_image(t_fdf *fdf)
