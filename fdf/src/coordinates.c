@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:46:31 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 19:15:21 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:38:23 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_coord	isometric_non_scaled(t_fdf *fdf, int x, int y, int z)
 	coords.y = ((1 /sqrt(6)) * (x + 2 * y + z));
 	coords.x -= fdf->min.x;
 	coords.y -= fdf->min.y;
+	coords.x = round(coords.x);
+	coords.y = round(coords.y);
 	return (coords);
 }
 
@@ -50,10 +52,7 @@ t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z)
 	coords.y *= fdf->scale.y;
 	coords.x += SCREEN_OFFSET_W;
 	coords.y += SCREEN_OFFSET_H;
-	coords.x = roundf(coords.x);
-	coords.y = roundf(coords.y);
-	printf("x: %f, y: %f\n", coords.x, coords.y);
-	// if (coords.x < SCREEN_OFFSET_W || coords.y < SCREEN_OFFSET_H || coords.x > SCREEN_WIDTH - SCREEN_OFFSET_W || coords.y > SCREEN_HEIGHT - SCREEN_OFFSET_H)
-		// printf("x: %f, y: %f\n", coords.x, coords.y);
+	coords.x = round(coords.x);
+	coords.y = round(coords.y);
 	return (coords);
 }

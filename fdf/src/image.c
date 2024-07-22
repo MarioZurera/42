@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:19:02 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 18:59:39 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:24:12 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@ static void	create_lines(t_fdf *fdf, size_t i, size_t j)
 	t_draw_point	pA;
 	t_draw_point	pB;
 
-	pA.coords = isometric_coordinates(fdf, j, i, fdf->map[i][j]);
-	pA.z = fdf->map[i][j];
+
 	if (j < fdf->matrix_width - 1)
 	{
+		pA.coords = isometric_coordinates(fdf, j, i, fdf->map[i][j]);
+		pA.z = fdf->map[i][j];
 		pB.coords = isometric_coordinates(fdf, j + 1, i, fdf->map[i][j + 1]);
 		pB.z = fdf->map[i][j + 1];
 		ft_draw_line(fdf, &pA, &pB);
 	}
 	if (i < fdf->matrix_height - 1)
 	{
+		pA.coords = isometric_coordinates(fdf, j, i, fdf->map[i][j]);
+		pA.z = fdf->map[i][j];
 		pB.coords = isometric_coordinates(fdf, j, i + 1, fdf->map[i + 1][j]);
 		pB.z = fdf->map[i + 1][j];
 		ft_draw_line(fdf, &pA, &pB);
@@ -98,15 +101,9 @@ static t_coord	get_isometric_scale(t_fdf *fdf)
 			max.y = ft_maxd(max.y, coords.y);
 		}
 	}
-	/*
-		(iso + OFF) * X = fdf->width - OFF
-	*/
 	coords.x = (fdf->width - (2 * SCREEN_OFFSET_W)) / max.x;
 	coords.y = (fdf->height - (2 * SCREEN_OFFSET_H)) / max.y;
-	printf("max.x: %f, max.y: %f\n", max.x, max.y);
-	printf("coords.x: %f, coords.y: %f\n", coords.x, coords.y);
 	return (coords);
-	// return ((t_coord){ft_mind(coords.x, coords.y), ft_mind(coords.x, coords.y)});
 }
 
 void	ft_process_image(t_fdf *fdf)

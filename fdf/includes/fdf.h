@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 17:59:36 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:31:51 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <stdio.h>
 
 /* CONSTANTS */
-# define SCREEN_WIDTH 1000
-# define SCREEN_HEIGHT 1000
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGHT 2000
 # define SCREEN_OFFSET_H 125
 # define SCREEN_OFFSET_W 125
 # define WINDOW_TITLE "FdF"
@@ -35,7 +35,7 @@
 
 /* COLORS */
 # define HIGH_COLOR 0xFF0000FF
-# define LOW_COLOR 0xFFFFFFFF
+# define LOW_COLOR 0xFFFF00FF
 # define BACKGROUND_COLOR 0x000000FF
 
 typedef enum e_error
@@ -53,7 +53,7 @@ typedef struct s_coord
 typedef struct s_draw_point
 {
 	t_coord	coords;
-	int		z;
+	double	z;
 }	t_draw_point;
 
 typedef struct s_fdf
@@ -92,10 +92,10 @@ void	free_fdf(t_fdf **ptr_fdf);
  * @brief Get the color gradient with the specified factor
  * @param hex1 The low color
  * @param hex2 The high color
- * @param factor The factor to calculate the gradient, a number between 0 and NUMBER_GRADIENT
+ * @param factor The factor to calculate the gradient, a number between 0 and 1
  * @return The color between hex1 and hex2 by a factor percentage
 */
-uint32_t	ft_color_gradient(uint32_t hex1, uint32_t hex2, uint32_t factor);
+uint32_t	ft_color_gradient(uint32_t hex1, uint32_t hex2, double factor);
 
 /**
  * @brief Get the isometric coordinates of a point in 3D space
