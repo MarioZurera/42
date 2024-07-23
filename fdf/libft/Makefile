@@ -13,7 +13,7 @@ SRCS	= ft_abs.c ft_alnum.c ft_atoi.c ft_bzero.c ft_calloc.c \
 		  ft_lstsize.c ft_strdelchr.c ft_strnchr.c ft_printf.c \
 		  ft_printf_utils.c ft_printf_utils2.c ft_printf_utils3.c ft_printf_utils4.c \
 		  ft_printf_utils5.c ft_lstdelone.c ft_deep_free.c ft_strchr_i.c ft_get_next_line.c \
-		  ft_minf.c ft_maxf.c ft_mind.c ft_maxd.c ft_atoi_base.c ft_atohex.c
+		  ft_minf.c ft_maxf.c ft_mind.c ft_maxd.c ft_atoi_base.c ft_atohex.c ft_str_in_trim.c
 OBJS	= $(SRCS:.c=.o)
 NAME	= libft.a
 CFLAGS	= -Wall -Wextra -Werror

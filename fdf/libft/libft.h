@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:10:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 17:41:22 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:46:44 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -390,6 +390,15 @@ char			*ft_strjoin(const char *s1, const char *s2);
  * @return The new string created or NULL if the allocation fails.
 */
 char			*ft_strtrim(const char *s1, const char *set);
+
+/**
+ * @brief Transform the string removing the elements in set
+ * from the beginning and the end.
+ * @param s1 The pointer to the string.
+ * @param set The pointer to the string set.
+ * @return A reference to s1.
+ */
+char	*ft_str_in_trim(char *s1, const char *set);
 
 /**
  * @brief Create an array of strings obtained by splitting the string s
