@@ -81,9 +81,13 @@ fclean: clean
 re: fclean all
 
 bonus: $(BONUS_OBJS)
-	@echo "$(C_BLUE)Builing $(NAME) with bonus...$(C_DEF)"
+	@echo "$(C_BLUE)Builing $(NAME)...$(C_DEF)"
+	@echo "$(C_BLUE)Compiling $(MLX_DIR)$(C_DEF)"
+	@cmake -S $(MLX_DIR) -B build
+	@make -s -C $(MLX_DIR)/$(BUILD_DIR) -j4
+	@echo "$(C_GREEN)$(MLX_DIR) compiled!$(C_DEF)"
 	@make all -s -C ./$(LIB_DIR)/
-	@$(CC) $(CFLAGS) $(BONUS_OBJS) -L./$(LIB_DIR) ./$(LIB_DIR)/$(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L./$(LIB_DIR) ./$(LIB_DIR)/$(LIBFT) -L./$(MLX_DIR)/$(BUILD_DIR) ./$(MLX_DIR)/$(BUILD_DIR)/$(MLX) -ldl -l$(GLFW) -pthread -lm -o $(NAME)
 	@echo "$(C_GREEN)$(CAP_NAME) built and ready to go!$(C_DEF)"
 
 .PHONY: all bonus clean fclean re .c.o
