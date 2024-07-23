@@ -6,13 +6,13 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 18:13:36 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 19:43:38 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static t_z_color_point	**ft_lst_to_array(t_list *list, t_fdf *fdf)
+static t_z_color_point	**ft_lst_to_array(t_list *list, t_fdf *fdf, const char *filename)
 {
 	t_list				*temp;
 	size_t				i;
@@ -23,6 +23,8 @@ static t_z_color_point	**ft_lst_to_array(t_list *list, t_fdf *fdf)
 	matrix = malloc((fdf->matrix_height + 1) * sizeof(t_z_color_point *));
 	while (i < fdf->matrix_height)
 	{
+		if (list->content == NULL)
+			print_error(FDF_INVALID_MAP, fdf, filename);
 		matrix[i] = (t_z_color_point *) list->content;
 		temp = list;
 		list = list->next;
@@ -33,33 +35,34 @@ static t_z_color_point	**ft_lst_to_array(t_list *list, t_fdf *fdf)
 	return (matrix);
 }
 
-static t_z_color_point	*matrix_line(t_fdf *fdf, const char *line, size_t len)
+static t_z_color_point	*matrix_line(t_fdf *fdf, char *line,
+	size_t len, const char *filename)
 {
 	t_z_color_point		*map_line;
 	char				**words;
-	char				**temp;
-	size_t				i;
+	char				**pairs;
+	int					i;
 
 	if (line == NULL)
 		return (NULL);
 	map_line = ft_calloc(len + 1, sizeof(t_z_color_point));
-	temp = ft_split(line, ' ');
-	i = 0;
-	while (i < len && temp != NULL && temp[i] != NULL)
+	words = ft_split(ft_str_in_trim(line, " \n"), ' ');
+	i = -1;
+	while ((size_t)(++i) < len && words != NULL && words[i] != NULL)
 	{
-		words = ft_split(temp[i], ',');
-		if (words == NULL)
-			print_error(FDF_INVALID_MAP, fdf, NULL);
-		map_line[i].z = ft_atoi(words[0]);
-		map_line[i].color = (ft_atohex(words[1]) << 8) | 0xFF;
-		free(words[0]);
-		free(words[1]);
-		free(words);
-		free(temp[i]);
-		i++;
+		pairs = ft_split(words[i], ',');
+		if (pairs == NULL)
+			print_error(FDF_INVALID_MAP, fdf, filename);
+		map_line[i].z = ft_atoi(pairs[0]);
+		map_line[i].color = (ft_atohex(pairs[1]) << 8) | 0xFF;
+		free(pairs[0]);
+		free(pairs[1]);
+		free(pairs);
+		free(words[i]);
 	}
-	free(temp);
-	return (map_line);
+	while (words[i] != NULL)
+		free(words[i++]);
+	return (free(words), map_line);
 }
 
 static size_t	count_words(const char *line)
@@ -95,7 +98,7 @@ static t_z_color_point	**ft_init_map(const char *filename, t_fdf *fdf)
 	if (line == NULL)
 		print_error(FDF_INVALID_MAP, fdf, filename);
 	fdf->matrix_width = count_words(line);
-	list = ft_lstnew(matrix_line(fdf, line, fdf->matrix_width));
+	list = ft_lstnew(matrix_line(fdf, line, fdf->matrix_width, filename));
 	while (line != NULL)
 	{
 		free(line);
@@ -103,10 +106,10 @@ static t_z_color_point	**ft_init_map(const char *filename, t_fdf *fdf)
 		if (line == NULL)
 			break ;
 		ft_lstadd_back(&list, ft_lstnew(
-				matrix_line(fdf, line, fdf->matrix_width)));
+				matrix_line(fdf, line, fdf->matrix_width, filename)));
 	}
 	close(fd);
-	return (ft_lst_to_array(list, fdf));
+	return (ft_lst_to_array(list, fdf, filename));
 }
 
 t_fdf	*ft_init_fdf(uint32_t width, uint32_t height,

@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:46:31 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 17:23:33 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 19:34:10 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@ static void	rotate(int *x, int *y, double angle)
 
 	yy = *y;
 	old_x = *x;
-	*x = round((*x * cos(angle)) - (*y * sin(angle)));
-	*y = round((old_x * sin(angle)) + (*y * cos(angle)));
+	*x = round(((*x) * (cos(angle))) - ((*y) * (sin(angle))));
+	*y = round(((old_x) * (sin(angle))) + ((*y) * (cos(angle))));
 }
 
 t_coord	isometric_non_scaled(t_fdf *fdf, int x, int y, int z)
 {
 	t_coord	coords;
 
-	rotate(&y, &z, M_PI / 2);
+	rotate(&x, &z, M_PI / 2);
+	rotate(&x, &y, M_PI / 2);
+	rotate(&x, &z, M_PI);
+	//rotate(&y, &z, M_PI / 2);
 	coords.x = ((sqrt(2) / 2) * (x - z));
 	coords.y = ((1 / sqrt(6)) * (x + 2 * y + z));
 	coords.x -= fdf->min.x;
@@ -39,10 +42,13 @@ t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z)
 {
 	t_coord	coords;
 
-	rotate(&y, &z, M_PI / 2);
+	rotate(&x, &z, M_PI / 2);
+	rotate(&x, &y, M_PI / 2);
+	rotate(&x, &z, M_PI);
+	// rotate(&y, &z, M_PI / 2);
 	if (fdf->scale.x == 0 || fdf->scale.y == 0)
 		fdf->scale = (t_coord){1, 1};
-	coords.x = ((sqrt(3) / sqrt(6)) * (x - z));
+	coords.x = ((sqrt(2) / 2) * (x - z));
 	coords.y = ((1 / sqrt(6)) * (x + 2 * y + z));
 	coords.x -= fdf->min.x;
 	coords.y -= fdf->min.y;

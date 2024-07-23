@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:58:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 18:09:54 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:55:05 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height, uint32_t colo
 	if (coords->x < 0 || (size_t) coords->x >= fdf->width
 		|| coords->y < 0 || (size_t) coords->y >= fdf->height)
 		return ;
-	if (color == 0xFF)
+	if (color <= 0xFF)
 	{
 		factor = (height - fdf->z_coords.x);
 		if (fdf->z_coords.y != fdf->z_coords.x)

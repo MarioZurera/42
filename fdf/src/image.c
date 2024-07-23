@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:19:02 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 15:21:32 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 19:27:38 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ static t_coord	get_isometric_scale(t_fdf *fdf)
 	}
 	coords.x = (fdf->width - (2 * SCREEN_OFFSET_W)) / max.x;
 	coords.y = (fdf->height - (2 * SCREEN_OFFSET_H)) / max.y;
-	coords.x = ft_mind(coords.x, coords.y);
-	coords.y = ft_mind(coords.x, coords.y);
+	// coords.x = ft_mind(coords.x, coords.y);
+	// coords.y = ft_mind(coords.x, coords.y);
 	return (coords);
 }
 
