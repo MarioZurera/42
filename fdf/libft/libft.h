@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:10:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 14:01:48 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:41:22 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,7 +339,7 @@ int				ft_toupper(int c);
  * whitespace characters, no conversion is performed and zero is returned.
  * 
 */
-int				ft_atoi(const char *s);
+long			ft_atoi(const char *s);
 
 /**
  * @brief Convert the string s to integer.
@@ -347,14 +347,14 @@ int				ft_atoi(const char *s);
  * @param base The string creating the base.
  * @return The integer converted.
  */
-int				ft_atoi_base(char *str, char *base);
+long	ft_atoi_base(char *str, char *base);
 
 /**
  * @brief Convert the string s in hexadecimal to integer.
  * @param s The pointer to the string.
  * @return The integer converted.
  */
-int				ft_atohex(char *str);
+unsigned long	ft_atohex(char *str);
 
 /**
  * @brief Convert the integer n to string.

@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:57:47 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 14:06:59 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:39:28 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static int	get_number(char *str, char *base, int i)
 	return (number);
 }
 
-int	ft_atoi_base(char *str, char *base)
+long	ft_atoi_base(char *str, char *base)
 {
-	int	number;
-	int	sign;
-	int	i;
+	long			number;
+	char			sign;
+	int				i;
 
 	sign = 1;
 	i = 0;
