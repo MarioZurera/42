@@ -87,7 +87,7 @@ bonus: $(BONUS_OBJS)
 	@make -s -C $(MLX_DIR)/$(BUILD_DIR) -j4
 	@echo "$(C_GREEN)$(MLX_DIR) compiled!$(C_DEF)"
 	@make all -s -C ./$(LIB_DIR)/
-	@$(CC) $(CFLAGS) $(OBJS) -L./$(LIB_DIR) ./$(LIB_DIR)/$(LIBFT) -L./$(MLX_DIR)/$(BUILD_DIR) ./$(MLX_DIR)/$(BUILD_DIR)/$(MLX) -ldl -l$(GLFW) -pthread -lm -o $(NAME)
+	@$(CC) $(CFLAGS) $(BONUS_OBJS) -L./$(LIB_DIR) ./$(LIB_DIR)/$(LIBFT) -L./$(MLX_DIR)/$(BUILD_DIR) ./$(MLX_DIR)/$(BUILD_DIR)/$(MLX) -ldl -l$(GLFW) -pthread -lm -o $(NAME)
 	@echo "$(C_GREEN)$(CAP_NAME) built and ready to go!$(C_DEF)"
 
 .PHONY: all bonus clean fclean re .c.o
