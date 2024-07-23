@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:56:36 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/19 19:41:00 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 13:50:36 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 void	free_fdf(t_fdf **ptr_fdf)
 {
 	t_fdf	*fdf;
+	int	i;
 
 	fdf = *ptr_fdf;
 	if (fdf == NULL)
 		return ;
 	if (fdf->mlx != NULL)
+	{
+		mlx_close_window(fdf->mlx);
 		mlx_terminate(fdf->mlx);
+	}
 	if (fdf->map != NULL)
-		ft_deep_free((void *) fdf->map, 2);
+	{
+		i = -1;
+		while ((size_t)(++i) < fdf->matrix_height)
+			free(fdf->map[i]);
+		free(fdf->map);
+	}
 	free(fdf);
 	*ptr_fdf = NULL;
 }

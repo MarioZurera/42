@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:46:31 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 19:38:23 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 13:01:21 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void rotate(int *x, int *y, double angle)
 {
-	int tmp;
+	int old_X;
 
-	tmp = *x;
-	*x = tmp * cos(angle) - *y * sin(angle);
-	*y = tmp * sin(angle) + *y * cos(angle);
+	old_X = *x;
+	*x = *x * cos(angle) - *y * sin(angle);
+	*y = old_X * sin(angle) + *y * cos(angle);
 }
 
 t_coord	isometric_non_scaled(t_fdf *fdf, int x, int y, int z)
@@ -31,8 +31,6 @@ t_coord	isometric_non_scaled(t_fdf *fdf, int x, int y, int z)
 	coords.y = ((1 /sqrt(6)) * (x + 2 * y + z));
 	coords.x -= fdf->min.x;
 	coords.y -= fdf->min.y;
-	coords.x = round(coords.x);
-	coords.y = round(coords.y);
 	return (coords);
 }
 
@@ -54,5 +52,7 @@ t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z)
 	coords.y += SCREEN_OFFSET_H;
 	coords.x = round(coords.x);
 	coords.y = round(coords.y);
+	if (coords.x < 0 || coords.y < 0 || coords.x > SCREEN_WIDTH - SCREEN_OFFSET_W || coords.y > SCREEN_HEIGHT - SCREEN_OFFSET_H)
+		printf("x: %f, y: %f\n", coords.x, coords.y);
 	return (coords);
 }

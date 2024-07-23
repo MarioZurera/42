@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:58:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 19:38:14 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:59:07 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_draw_line(t_fdf *fdf, t_draw_point *pA, t_draw_point *pB)
 	deltaX /= num_pixels;
 	deltaY /= num_pixels;
 	deltaZ /= num_pixels;
-	while (num_pixels-- > 0)
+	while (num_pixels--)
 	{
 		ft_draw_point(fdf, &pA->coords, pA->z);
 		pA->coords.x += deltaX;

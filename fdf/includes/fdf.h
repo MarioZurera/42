@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 19:31:51 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:08:11 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ typedef struct s_draw_point
 	t_coord	coords;
 	double	z;
 }	t_draw_point;
+
+typedef struct s_z_color_point
+{
+	int		z;
+	int		color;
+}	t_z_color_point;
+
 
 typedef struct s_fdf
 {
