@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 17:45:44 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:13:36 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ static t_z_color_point	*matrix_line(t_fdf *fdf, const char *line, size_t len)
 		return (NULL);
 	map_line = ft_calloc(len + 1, sizeof(t_z_color_point));
 	temp = ft_split(line, ' ');
-	if (temp == NULL)
-		print_error(FDF_INVALID_MAP, fdf, NULL);
 	i = 0;
-	while (i < len && temp[i] != NULL)
+	while (i < len && temp != NULL && temp[i] != NULL)
 	{
 		words = ft_split(temp[i], ',');
 		if (words == NULL)
 			print_error(FDF_INVALID_MAP, fdf, NULL);
 		map_line[i].z = ft_atoi(words[0]);
 		map_line[i].color = (ft_atohex(words[1]) << 8) | 0xFF;
+		free(words[0]);
+		free(words[1]);
 		free(words);
 		free(temp[i]);
 		i++;
