@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 19:19:39 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 20:38:02 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include "../libft/libft.h"
 # include <MLX42/MLX42.h>
 # include <math.h>
-
-/* To-Check libs */
+# include <sys/time.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -29,7 +28,6 @@
 # define SCREEN_OFFSET_H 125
 # define SCREEN_OFFSET_W 125
 # define WINDOW_TITLE "FdF"
-# define NUMBER_GRADIENT 1000
 
 /* COLORS */
 # define HIGH_COLOR 0xFF0000FF
@@ -61,6 +59,13 @@ typedef struct s_z_color_point
 	uint32_t	color;
 }	t_z_color_point;
 
+typedef struct s_rotation
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_rotation;
+
 typedef struct s_fdf
 {
 	mlx_t			*mlx;
@@ -73,6 +78,7 @@ typedef struct s_fdf
 	t_coord			scale;
 	t_coord			z_coords;
 	t_coord			min;
+	t_rotation		rotation;
 }	t_fdf;
 
 typedef struct s_color

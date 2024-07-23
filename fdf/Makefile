@@ -28,7 +28,7 @@ SRCS		= $(addprefix $(SRC_DIR)/,$(SRC_NAME))
 OBJS		= $(addprefix $(OBJ_DIR)/,$(OBJ_NAME))
 
 # BONUS #
-BONUS_SRC_NAME	= fdf.c
+BONUS_SRC_NAME	= fdf_bonus.c init_bonus.c image_bonus.c draw_bonus.c color_bonus.c coordinates_bonus.c error_bonus.c
 BONUS_OBJ_NAME	= $(notdir $(BONUS_SRC_NAME:.c=.o))
 BONUS_SRCS		= $(addprefix $(SRC_DIR)/,$(BONUS_SRC_NAME))
 BONUS_OBJS		= $(addprefix $(OBJ_DIR)/,$(BONUS_OBJ_NAME))

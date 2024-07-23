@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:39:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 15:21:53 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 20:28:39 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ uint32_t	ft_color_gradient(uint32_t hex1, uint32_t hex2, double factor)
 	t_color	color;
 	t_color	color2;
 
-	if (factor > NUMBER_GRADIENT)
-		factor = NUMBER_GRADIENT;
+	if (factor < 0)
+		factor = 0;
+	if (factor > 1)
+		factor = 1;
 	color = ft_hex_to_color(hex1);
 	color2 = ft_hex_to_color(hex2);
 	color.red += round((color2.red - color.red) * factor);

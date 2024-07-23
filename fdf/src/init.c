@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 19:43:38 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 20:32:00 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,6 @@ t_fdf	*ft_init_fdf(uint32_t width, uint32_t height,
 	if (res < 0)
 		print_error(FDF_INIT_ERROR, fdf, NULL);
 	fdf->scale = (t_coord){1, 1};
+	fdf->rotation = (t_rotation){1, 3, 0};
 	return (fdf);
 }
