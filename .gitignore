@@ -15,3 +15,7 @@ leaks
 # MLX
 MLX42/
 build/
+
+# Tests
+test
+test.txt
