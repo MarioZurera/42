@@ -6,19 +6,11 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:39:22 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/22 19:30:20 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:21:53 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-typedef struct s_color
-{
-	uint8_t	red;
-	uint8_t	green;
-	uint8_t	blue;
-	uint8_t	alpha;
-}	t_color;
 
 static t_color	ft_hex_to_color(uint32_t hex)
 {

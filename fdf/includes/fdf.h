@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 14:08:11 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:33:43 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # define WINDOW_TITLE "FdF"
 # define NUMBER_GRADIENT 1000
 
-
-
 /* COLORS */
 # define HIGH_COLOR 0xFF0000FF
 # define LOW_COLOR 0xFFFF00FF
@@ -54,28 +52,36 @@ typedef struct s_draw_point
 {
 	t_coord	coords;
 	double	z;
+	int		color;
 }	t_draw_point;
 
 typedef struct s_z_color_point
 {
-	int		z;
-	int		color;
+	int			z;
+	uint32_t	color;
 }	t_z_color_point;
-
 
 typedef struct s_fdf
 {
 	mlx_t			*mlx;
 	mlx_image_t		*image;
-	int				**map;
-	size_t	width;
-	size_t	height;
-	size_t	matrix_width;
-	size_t	matrix_height;
-	t_coord scale;
-	t_coord	z_coords;
-	t_coord min;
+	t_z_color_point	**map;
+	size_t			width;
+	size_t			height;
+	size_t			matrix_width;
+	size_t			matrix_height;
+	t_coord			scale;
+	t_coord			z_coords;
+	t_coord			min;
 }	t_fdf;
+
+typedef struct s_color
+{
+	uint8_t	red;
+	uint8_t	green;
+	uint8_t	blue;
+	uint8_t	alpha;
+}	t_color;
 
 /**
  * @brief Initialize the fdf structure
@@ -86,14 +92,14 @@ typedef struct s_fdf
  * @return The fdf structure
  * @note The fdf structure should be freed with free_fdf
 */
-t_fdf	*ft_init_fdf(uint32_t width, uint32_t height,
-			bool resize, const char *filename);
+t_fdf		*ft_init_fdf(uint32_t width, uint32_t height,
+				bool resize, const char *filename);
 
 /**
  * @brief Free the fdf structure and all its internal elements
  * @param ptr_fdf The pointer to the fdf structure
 */
-void	free_fdf(t_fdf **ptr_fdf);
+void		free_fdf(t_fdf **ptr_fdf);
 
 /**
  * @brief Get the color gradient with the specified factor
@@ -112,7 +118,7 @@ uint32_t	ft_color_gradient(uint32_t hex1, uint32_t hex2, double factor);
  * @param z The z coordinate
  * @return The isometric coordinates of the point
  */
-t_coord	isometric_non_scaled(t_fdf *fdf, int x, int y, int z);
+t_coord		isometric_non_scaled(t_fdf *fdf, int x, int y, int z);
 
 /**
  * @brief Get the isometric coordinates of a point in 3D space
@@ -123,7 +129,7 @@ t_coord	isometric_non_scaled(t_fdf *fdf, int x, int y, int z);
  * @return The isometric coordinates of the point
  * @note The coordinates are scaled and normalized to the screen size
  */
-t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z);
+t_coord		isometric_coordinates(t_fdf *fdf, int x, int y, int z);
 
 /**
  * @brief Draw the screen background with the specified color
@@ -131,15 +137,7 @@ t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z);
  * @param color The color to draw the background
  * @note The color should be in the format 0xRRGGBBAA
 */
-void	ft_draw_background(t_fdf *fdf, uint32_t color);
-
-/**
- * @brief Draw a point on the screen
- * @param fdf The fdf structure
- * @param coords The coordinates of the point in 2D representation
- * @param height The height of the point for the color gradient
-*/
-//void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height);
+void		ft_draw_background(t_fdf *fdf, uint32_t color);
 
 /**
  * @brief Draw a line between two points on the screen
@@ -147,21 +145,21 @@ void	ft_draw_background(t_fdf *fdf, uint32_t color);
  * @param pA The first point
  * @param pB The second point
 */
-void	ft_draw_line(t_fdf *fdf, t_draw_point *pA, t_draw_point *pB);
+void		ft_draw_line(t_fdf *fdf, t_draw_point *pA, t_draw_point *pB);
 
 /**
  * @brief Print the fdf map on the screen
  * @param fdf The fdf structure
 */
-void	ft_process_image(t_fdf *fdf);
+void		ft_process_image(t_fdf *fdf);
 
 /**
  * @brief Print an error message, free the fdf structure and exit the program
  * @param code The error code
  * @param fdf The fdf structure
 */
-void	print_error(t_error code, t_fdf *fdf, const char *msg);
+void		print_error(t_error code, t_fdf *fdf, const char *msg);
 
-int		main(int argc, char **argv);
+int			main(int argc, char **argv);
 
 #endif /* FDF_H */

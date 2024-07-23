@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:58:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 12:59:07 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:36:10 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,41 +30,42 @@ void	ft_draw_background(t_fdf *fdf, uint32_t color)
 	}
 }
 
-static void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height)
+static void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height, uint32_t color)
 {
-	uint32_t	color;
 	double		factor;
 
 	if (coords->x < 0 || (size_t) coords->x >= fdf->width
 		|| coords->y < 0 || (size_t) coords->y >= fdf->height)
 		return ;
-	if (fdf->z_coords.y != fdf->z_coords.x)
-		factor = (height - fdf->z_coords.x) / (fdf->z_coords.y - fdf->z_coords.x);
-	else
-		factor = 0;
-	color = ft_color_gradient(LOW_COLOR, HIGH_COLOR, factor);
+	if (color == 0)
+	{
+		factor = (height - fdf->z_coords.x);
+		if (fdf->z_coords.y != fdf->z_coords.x)
+			factor /= (fdf->z_coords.y - fdf->z_coords.x);
+		color = ft_color_gradient(LOW_COLOR, HIGH_COLOR, factor);
+	}
 	mlx_put_pixel(fdf->image, coords->x, coords->y, color);
 }
 
 void	ft_draw_line(t_fdf *fdf, t_draw_point *pA, t_draw_point *pB)
 {
 	double	num_pixels;
-	double	deltaX;
-	double	deltaY;
-	double	deltaZ;
+	double	delta_x;
+	double	delta_y;
+	double	delta_z;
 
-	deltaX = pB->coords.x - pA->coords.x;
-	deltaY = pB->coords.y - pA->coords.y;
-	deltaZ = pB->z - pA->z;
-	num_pixels = round(sqrt((deltaX * deltaX) + (deltaY * deltaY)));
-	deltaX /= num_pixels;
-	deltaY /= num_pixels;
-	deltaZ /= num_pixels;
+	delta_x = pB->coords.x - pA->coords.x;
+	delta_y = pB->coords.y - pA->coords.y;
+	delta_z = pB->z - pA->z;
+	num_pixels = round(sqrt((delta_x * delta_x) + (delta_y * delta_y)));
+	delta_x /= num_pixels;
+	delta_y /= num_pixels;
+	delta_z /= num_pixels;
 	while (num_pixels--)
 	{
-		ft_draw_point(fdf, &pA->coords, pA->z);
-		pA->coords.x += deltaX;
-		pA->coords.y += deltaY;
-		pA->z += deltaZ;
+		ft_draw_point(fdf, &pA->coords, pA->z, pA->color);
+		pA->coords.x += delta_x;
+		pA->coords.y += delta_y;
+		pA->z += delta_z;
 	}
 }

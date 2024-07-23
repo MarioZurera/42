@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:56:36 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 13:50:36 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:20:05 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_fdf(t_fdf **ptr_fdf)
 {
 	t_fdf	*fdf;
-	int	i;
+	int		i;
 
 	fdf = *ptr_fdf;
 	if (fdf == NULL)
