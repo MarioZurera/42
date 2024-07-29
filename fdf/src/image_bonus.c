@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.c                                            :+:      :+:    :+:   */
+/*   image_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:19:02 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 19:27:38 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:03:36 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 static void	create_lines(t_fdf *fdf, size_t i, size_t j)
 {
@@ -105,8 +105,6 @@ static t_coord	get_isometric_scale(t_fdf *fdf)
 	}
 	coords.x = (fdf->width - (2 * SCREEN_OFFSET_W)) / max.x;
 	coords.y = (fdf->height - (2 * SCREEN_OFFSET_H)) / max.y;
-	// coords.x = ft_mind(coords.x, coords.y);
-	// coords.y = ft_mind(coords.x, coords.y);
 	return (coords);
 }
 
@@ -117,6 +115,7 @@ void	ft_process_image(t_fdf *fdf)
 
 	ft_draw_background(fdf, BACKGROUND_COLOR);
 	fdf->z_coords = get_height(fdf);
+	fdf->min = (t_coord){0, 0};
 	fdf->min = get_min_coords(fdf);
 	fdf->scale = get_isometric_scale(fdf);
 	i = 0;

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coordinates.c                                      :+:      :+:    :+:   */
+/*   coordinates_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:46:31 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 20:33:52 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:08:06 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 static void	rotate(int *x, int *y, double angle)
 {
@@ -59,7 +59,7 @@ t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z)
 	coords.y += SCREEN_OFFSET_H;
 	coords.x = round(coords.x);
 	coords.y = round(coords.y);
-	if (coords.x < 0 || coords.y < 0 || coords.x > SCREEN_WIDTH - SCREEN_OFFSET_W || coords.y > SCREEN_HEIGHT - SCREEN_OFFSET_H)
-		printf("x: %f, y: %f\n", coords.x, coords.y);
+	// if (coords.x < 0 || coords.y < 0 || coords.x > SCREEN_WIDTH - SCREEN_OFFSET_W || coords.y > SCREEN_HEIGHT - SCREEN_OFFSET_H)
+	// 	printf("x: %f, y: %f\n", coords.x, coords.y);
 	return (coords);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 20:38:02 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:31:00 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_fdf
 	t_coord			z_coords;
 	t_coord			min;
 	t_rotation		rotation;
+	struct timeval		t1;
+	struct timeval		t2;
 }	t_fdf;
 
 typedef struct s_color
