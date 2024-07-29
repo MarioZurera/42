@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:46:31 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 21:04:06 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:17:20 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	rotate(int *x, int *y, double angle)
 {
 	int	old_x;
-	int yy;
+	int	yy;
 
 	yy = *y;
 	old_x = *x;
@@ -59,7 +59,5 @@ t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z)
 	coords.y += SCREEN_OFFSET_H;
 	coords.x = round(coords.x);
 	coords.y = round(coords.y);
-	if (coords.x < 0 || coords.y < 0 || coords.x > SCREEN_WIDTH - SCREEN_OFFSET_W || coords.y > SCREEN_HEIGHT - SCREEN_OFFSET_H)
-		printf("x: %f, y: %f\n", coords.x, coords.y);
 	return (coords);
 }

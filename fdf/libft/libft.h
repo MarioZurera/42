@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:10:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/25 17:31:56 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:11:48 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,7 +347,7 @@ long			ft_atoi(const char *s);
  * @param base The string creating the base.
  * @return The integer converted.
  */
-long	ft_atoi_base(char *str, char *base);
+long			ft_atoi_base(char *str, char *base);
 
 /**
  * @brief Convert the string s in hexadecimal to integer.
@@ -398,7 +398,7 @@ char			*ft_strtrim(const char *s1, const char *set);
  * @param set The pointer to the string set.
  * @return A reference to s1.
  */
-char	*ft_str_in_trim(char *s1, const char *set);
+char			*ft_str_in_trim(char *s1, const char *set);
 
 /**
  * @brief Create an array of strings obtained by splitting the string s

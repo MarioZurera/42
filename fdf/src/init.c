@@ -6,13 +6,14 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 20:59:56 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:16:06 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static t_z_color_point	**ft_lst_to_array(t_list *list, t_fdf *fdf, const char *filename)
+static t_z_color_point	**ft_lst_to_array(t_list *list, t_fdf *fdf,
+		const char *filename)
 {
 	t_list				*temp;
 	size_t				i;

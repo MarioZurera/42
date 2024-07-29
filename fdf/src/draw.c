@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 13:58:23 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/23 18:55:05 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:16:48 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_draw_background(t_fdf *fdf, uint32_t color)
 	}
 }
 
-static void	ft_draw_point(t_fdf *fdf, t_coord *coords, int height, uint32_t color)
+static void	ft_draw_point(t_fdf *fdf, t_coord *coords,
+		int height, uint32_t color)
 {
 	double		factor;
 

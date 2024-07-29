@@ -6,12 +6,12 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/25 16:31:00 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:10:35 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include "../libft/colors.h"
 # include "../libft/libft.h"
@@ -27,6 +27,7 @@
 # define SCREEN_HEIGHT 2000
 # define SCREEN_OFFSET_H 125
 # define SCREEN_OFFSET_W 125
+# define MOVEMENT_FACTOR 100
 # define WINDOW_TITLE "FdF"
 
 /* COLORS */
@@ -79,8 +80,9 @@ typedef struct s_fdf
 	t_coord			z_coords;
 	t_coord			min;
 	t_rotation		rotation;
-	struct timeval		t1;
-	struct timeval		t2;
+	t_coord			movement;
+	struct timeval	t1;
+	struct timeval	t2;
 }	t_fdf;
 
 typedef struct s_color
@@ -170,4 +172,4 @@ void		print_error(t_error code, t_fdf *fdf, const char *msg);
 
 int			main(int argc, char **argv);
 
-#endif /* FDF_H */
+#endif /* FDF_BONUS_H */
