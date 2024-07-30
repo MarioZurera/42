@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 16:44:26 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/30 15:03:45 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:53:00 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ t_fdf	*ft_init_fdf(uint32_t width, uint32_t height,
 	fdf->rotation = (t_rotation){1, 3, 0};
 	fdf->movement = (t_coord){0, 0};
 	fdf->zoom = (t_coord){1, 1};
+	fdf->perspective = 0;
 	return (fdf);
 }

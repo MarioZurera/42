@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:32:39 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/29 20:10:35 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:51:38 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define SCREEN_OFFSET_H 125
 # define SCREEN_OFFSET_W 125
 # define MOVEMENT_FACTOR 100
+# define ZOOM_FACTOR 1.25
 # define WINDOW_TITLE "FdF"
 
 /* COLORS */
@@ -81,6 +82,8 @@ typedef struct s_fdf
 	t_coord			min;
 	t_rotation		rotation;
 	t_coord			movement;
+	t_coord			zoom;
+	char			perspective;
 	struct timeval	t1;
 	struct timeval	t2;
 }	t_fdf;

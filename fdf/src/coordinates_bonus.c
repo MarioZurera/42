@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:46:31 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/30 15:06:48 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:11:22 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,20 @@ static void	rotate(int *x, int *y, double angle)
 
 static void	ft_rotation(t_fdf *fdf, int *x, int *y, int *z)
 {
-	rotate(y, z, fdf->rotation.x * M_PI / 2);
-	rotate(x, z, fdf->rotation.y * M_PI / 2);
-	rotate(x, y, fdf->rotation.z * M_PI / 2);
+	if (fdf->perspective == 0)
+	{
+		rotate(y, z, fdf->rotation.x * M_PI / 2);
+		rotate(x, z, fdf->rotation.y * M_PI / 2);
+		rotate(x, y, fdf->rotation.z * M_PI / 2);
+	}
+	if (fdf->perspective == 1)
+	{
+		rotate(y, z, 3 * M_PI / 4);
+		rotate(x, z, 0 * M_PI / 2);
+		rotate(x, y, M_PI / 2);
+		//rotate(y, z, M_PI / 2);
+		rotate(x, y, -M_PI / 2);
+	}
 }
 
 t_coord	isometric_non_scaled(t_fdf *fdf, int x, int y, int z)

@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 18:09:28 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/30 15:42:36 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:53:28 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	key_hook(mlx_key_data_t keydata, void *data)
 	if (keydata.action == MLX_PRESS && keydata.key == MLX_KEY_LEFT)
 		fdf->movement.x += -1 - (keydata.modifier == MLX_CONTROL) * 100;
 	if (keydata.action == MLX_PRESS && keydata.key == MLX_KEY_I)
-		fdf->perspective = (fdf->perspective + 1) % 2;
+	 	fdf->perspective = (fdf->perspective + 1) % 2;
 }
 
 static void	hook(void *data)
