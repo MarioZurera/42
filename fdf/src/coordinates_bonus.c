@@ -6,7 +6,7 @@
 /*   By: mzurera- <mzurera-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:46:31 by mzurera-          #+#    #+#             */
-/*   Updated: 2024/07/29 20:14:41 by mzurera-         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:06:48 by mzurera-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_coord	isometric_coordinates(t_fdf *fdf, int x, int y, int z)
 	coords.y -= fdf->min.y;
 	coords.x *= fdf->scale.x;
 	coords.y *= fdf->scale.y;
+	coords.x *= fdf->zoom.x;
+	coords.y *= fdf->zoom.y;
 	coords.x += SCREEN_OFFSET_W;
 	coords.y += SCREEN_OFFSET_H;
 	coords.x += fdf->movement.x * MOVEMENT_FACTOR;
